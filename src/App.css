@@ -91,28 +91,40 @@
   transform: translateY(0);
 }
 
-/* Secrets View Button */
-.secrets-view-button {
-  width: 3rem;
-  height: 3rem;
-  margin-top: 1rem;
-  margin-left: auto;
-  margin-right: auto;
-  display: block;
-  font-size: 1.5rem;
+/* Secrets Search Wrapper */
+.secrets-search-wrapper {
+  display: flex;
+  gap: 0.75rem;
+  align-items: stretch;
+  width: 100%;
+  margin-bottom: 1rem;
+}
+
+.secrets-view-toggle {
+  min-width: 2.5rem;
+  width: 2.5rem;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.25rem;
   font-weight: bold;
-  border-radius: 50%;
+  border-radius: 4px;
   border: 2px solid #646cff;
   background-color: #1a1a1a;
   color: rgba(255, 255, 255, 0.87);
   cursor: pointer;
   transition: all 0.3s ease;
+  flex-shrink: 0;
 }
 
-.secrets-view-button:hover {
-  background-color: #242424;
-  border-color: #747bff;
-  transform: scale(1.1);
+.secrets-view-toggle:hover {
+  background-color: #646cff;
+  transform: scale(1.05);
+}
+
+.secrets-view-toggle:active {
+  transform: scale(0.95);
 }
 
 /* Secrets View Overlay */
@@ -145,11 +157,26 @@
   gap: 1.5rem;
 }
 
+.secrets-view-header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+}
+
 .secrets-view-title {
   margin: 0;
   font-size: 1.5rem;
   font-weight: 600;
   color: rgba(255, 255, 255, 0.87);
+  text-align: center;
+}
+
+.secrets-view-campaign {
+  margin: 0;
+  font-size: 1.1rem;
+  font-weight: 500;
+  color: rgba(255, 255, 255, 0.7);
   text-align: center;
 }
 

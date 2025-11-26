@@ -7,9 +7,10 @@ interface ItemsSectionProps {
   items: string[];
   onItemsChange: (items: string[]) => void;
   campaign: GameType;
+  onShowSecretsView: () => void;
 }
 
-export default function SecretsSection({ items, onItemsChange, campaign }: ItemsSectionProps) {
+export default function SecretsSection({ items, onItemsChange, campaign, onShowSecretsView }: ItemsSectionProps) {
   const [expanded, setExpanded] = useState(false);
   const [searchValue, setSearchValue] = useState('');
 
@@ -75,31 +76,35 @@ export default function SecretsSection({ items, onItemsChange, campaign }: Items
 
       {expanded && (
         <div className="items-content">
-          <Autocomplete
-            options={suggestionItems.map(item => item.name)}
-            value={null}
-            inputValue={searchValue}
-            onInputChange={(_, newValue) => setSearchValue(newValue)}
-            onChange={(_, newValue) => handleAddItem(newValue)}
-            filterOptions={(options, state) => {
-              // Only show suggestions if user has typed 3 or more characters
-              if (state.inputValue.length < 3) {
-                return [];
-              }
-              return options.filter(option =>
-                option.toLowerCase().startsWith(state.inputValue.toLowerCase())
-              );
-            }}
-            open={searchValue.length >= 3}
-            noOptionsText="No matching secrets"
-            renderInput={(params) => (
-              <TextField 
-                {...params} 
-                placeholder="Search for secrets..."
-                variant="outlined"
-                size="small"
-                sx={{
-                  '& .MuiOutlinedInput-root': {
+          <div className="secrets-search-wrapper">
+            <button className="secrets-view-toggle" onClick={onShowSecretsView}>
+              ?
+            </button>
+            <Autocomplete
+              options={suggestionItems.map(item => item.name)}
+              value={null}
+              inputValue={searchValue}
+              onInputChange={(_, newValue) => setSearchValue(newValue)}
+              onChange={(_, newValue) => handleAddItem(newValue)}
+              filterOptions={(options, state) => {
+                // Only show suggestions if user has typed 3 or more characters
+                if (state.inputValue.length < 3) {
+                  return [];
+                }
+                return options.filter(option =>
+                  option.toLowerCase().startsWith(state.inputValue.toLowerCase())
+                );
+              }}
+              open={searchValue.length >= 3}
+              noOptionsText="No matching secrets"
+              renderInput={(params) => (
+                <TextField 
+                  {...params} 
+                  placeholder="Search for secrets..."
+                  variant="outlined"
+                  size="small"
+                  sx={{
+                    '& .MuiOutlinedInput-root': {
                     color: 'rgba(255, 255, 255, 0.87)',
                     backgroundColor: '#1a1a1a',
                     '& fieldset': {
@@ -148,9 +153,10 @@ export default function SecretsSection({ items, onItemsChange, campaign }: Items
               },
             }}
             sx={{
-              marginBottom: '1rem',
+              flex: 1,
             }}
           />
+          </div>
 
           {items.length > 0 && (
             <div className="items-list">

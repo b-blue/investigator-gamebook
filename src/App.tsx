@@ -350,17 +350,13 @@ function App() {
           items={getCurrentCharacter().secrets}
           onItemsChange={updateSecrets}
           campaign={activeGame}
+          onShowSecretsView={() => setShowSecretsView(true)}
         />
         
         {gameState[activeGame].currentCharacterName && (
-          <>
-            <button className="finish-run-button" onClick={handleFinishRun}>
-              Finish Run
-            </button>
-            <button className="secrets-view-button" onClick={() => setShowSecretsView(true)}>
-              ?
-            </button>
-          </>
+          <button className="finish-run-button" onClick={handleFinishRun}>
+            Finish Run
+          </button>
         )}
       </div>
 
@@ -368,7 +364,10 @@ function App() {
         <div className="secrets-view-overlay" onClick={() => setShowSecretsView(false)}>
           <div className="secrets-view-content" onClick={(e) => e.stopPropagation()}>
             <button className="modal-close" onClick={() => setShowSecretsView(false)}>✕</button>
-            <h2 className="secrets-view-title">Secrets Found - {GAME_TITLES[activeGame]}</h2>
+            <div className="secrets-view-header">
+              <h2 className="secrets-view-title">Secrets Found</h2>
+              <p className="secrets-view-campaign">{GAME_TITLES[activeGame]}</p>
+            </div>
             
             {gameState[activeGame].foundSecrets.length === 0 ? (
               <p className="secrets-view-empty">No secrets found yet. Complete runs to discover secrets!</p>
