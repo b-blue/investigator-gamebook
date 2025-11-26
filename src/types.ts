@@ -34,6 +34,7 @@ export interface GameState {
   diceRoll: number;
   attributes: Attributes;
   abilities: string[]; // Array of ability names
+  weaknesses: string[]; // Array of weakness names
   items: string[]; // Array of item names
   secrets: string[]; // Array of secret names
   // Additional character sheet data will be added in future prompts

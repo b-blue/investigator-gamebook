@@ -8,16 +8,16 @@ interface ItemsSectionProps {
   onItemsChange: (items: string[]) => void;
 }
 
-export default function AbilitiesSection({ items, onItemsChange }: ItemsSectionProps) {
+export default function WeaknessesSection({ items, onItemsChange }: ItemsSectionProps) {
   const [expanded, setExpanded] = useState(false);
   const [searchValue, setSearchValue] = useState('');
 
   const availableAbilities: Ability[] = abilitiesData as Ability[];
 
-  // Filter out already selected items and weaknesses from suggestions
+  // Filter to only show weaknesses and exclude already selected items
   const suggestionItems = useMemo(() => {
     return availableAbilities.filter(ability => 
-      ability.isWeakness !== true && !items.includes(ability.name)
+      ability.isWeakness === true && !items.includes(ability.name)
     );
   }, [items, availableAbilities]);
 
@@ -42,10 +42,10 @@ export default function AbilitiesSection({ items, onItemsChange }: ItemsSectionP
           onClick={() => setExpanded(!expanded)}
         >
           {expanded && (
-            <div className="items-title fade-in">Abilities</div>
+            <div className="items-title fade-in">Weaknesses</div>
           )}
           {!expanded && items.length === 0 && (
-            <div className="items-title">Abilities</div>
+            <div className="items-title">Weaknesses</div>
           )}
           {!expanded && items.length > 0 && (
             <div className={`collapsed-item first-item ${items.length > 1 ? 'has-multiple' : ''}`}>
@@ -98,11 +98,11 @@ export default function AbilitiesSection({ items, onItemsChange }: ItemsSectionP
               );
             }}
             open={searchValue.length >= 3}
-            noOptionsText="No matching abilities"
+            noOptionsText="No matching weaknesses"
             renderInput={(params) => (
               <TextField 
                 {...params} 
-                placeholder="Search for abilities..."
+                placeholder="Search for weaknesses..."
                 variant="outlined"
                 size="small"
                 sx={{

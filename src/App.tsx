@@ -7,6 +7,7 @@ import CharacterName from './components/CharacterName'
 import AttributesSection from './components/AttributesSection'
 import ItemsSection from './components/ItemsSection'
 import AbilitiesSection from './components/AbilitiesSection'
+import WeaknessesSection from './components/WeaknessesSection'
 import SecretsSection from './components/SecretsSection'
 
 const GAME_TITLES = {
@@ -33,8 +34,8 @@ function App() {
     // Load from localStorage or initialize
     const saved = localStorage.getItem(STORAGE_KEY);
     const defaultState = {
-      TDOA: { characterName: '', diceRoll: 1, attributes: DEFAULT_ATTRIBUTES, abilities: [], items: [], secrets: [] },
-      TTOI: { characterName: '', diceRoll: 1, attributes: DEFAULT_ATTRIBUTES, abilities: [], items: [], secrets: [] }
+      TDOA: { characterName: '', diceRoll: 1, attributes: DEFAULT_ATTRIBUTES, abilities: [], weaknesses: [], items: [], secrets: [] },
+      TTOI: { characterName: '', diceRoll: 1, attributes: DEFAULT_ATTRIBUTES, abilities: [], weaknesses: [], items: [], secrets: [] }
     };
     
     if (saved) {
@@ -47,6 +48,7 @@ function App() {
             diceRoll: parsed.TDOA?.diceRoll || 1,
             attributes: parsed.TDOA?.attributes || DEFAULT_ATTRIBUTES,
             abilities: parsed.TDOA?.abilities || [],
+            weaknesses: parsed.TDOA?.weaknesses || [],
             items: parsed.TDOA?.items || [],
             secrets: parsed.TDOA?.secrets || []
           },
@@ -55,6 +57,7 @@ function App() {
             diceRoll: parsed.TTOI?.diceRoll || 1,
             attributes: parsed.TTOI?.attributes || DEFAULT_ATTRIBUTES,
             abilities: parsed.TTOI?.abilities || [],
+            weaknesses: parsed.TTOI?.weaknesses || [],
             items: parsed.TTOI?.items || [],
             secrets: parsed.TTOI?.secrets || []
           }
@@ -126,6 +129,16 @@ function App() {
     }));
   };
 
+  const updateWeaknesses = (weaknesses: string[]) => {
+    setGameState(prev => ({
+      ...prev,
+      [activeGame]: {
+        ...prev[activeGame],
+        weaknesses
+      }
+    }));
+  };
+
   const updateSecrets = (secrets: string[]) => {
     setGameState(prev => ({
       ...prev,
@@ -161,6 +174,11 @@ function App() {
         <AbilitiesSection
           items={gameState[activeGame].abilities}
           onItemsChange={updateAbilities}
+        />
+
+        <WeaknessesSection
+          items={gameState[activeGame].weaknesses}
+          onItemsChange={updateWeaknesses}
         />
 
         <ItemsSection

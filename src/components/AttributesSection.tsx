@@ -96,41 +96,41 @@ export default function AttributesSection({ attributes, onAttributeChange, onRol
     <>
       <div className="attributes-section">
         <div className="attribute-row">
-          <button className="attribute-btn" onClick={() => openModal('willpower')}>
+          <button className="attribute-btn willpower" onClick={() => openModal('willpower')}>
             <span className={showValues.willpower ? 'fade-out' : 'fade-in'}>{attributeLabels.willpower}</span>
             <span className={showValues.willpower ? 'fade-in' : 'fade-out'}>{attributes.willpower}</span>
           </button>
-          <button className="attribute-btn" onClick={() => openModal('intellect')}>
+          <button className="attribute-btn intellect" onClick={() => openModal('intellect')}>
             <span className={showValues.intellect ? 'fade-out' : 'fade-in'}>{attributeLabels.intellect}</span>
             <span className={showValues.intellect ? 'fade-in' : 'fade-out'}>{attributes.intellect}</span>
           </button>
-          <button className="attribute-btn" onClick={() => openModal('combat')}>
+          <button className="attribute-btn combat" onClick={() => openModal('combat')}>
             <span className={showValues.combat ? 'fade-out' : 'fade-in'}>{attributeLabels.combat}</span>
             <span className={showValues.combat ? 'fade-in' : 'fade-out'}>{attributes.combat}</span>
           </button>
         </div>
 
         <div className="attribute-row">
-          <button className="attribute-btn" onClick={() => openModal('health')}>
+          <button className="attribute-btn health" onClick={() => openModal('health')}>
             <span className={showValues.health ? 'fade-out' : 'fade-in'}>{attributeLabels.health}</span>
             <span className={showValues.health ? 'fade-in' : 'fade-out'}>{attributes.health}</span>
           </button>
-          <button className="attribute-btn" onClick={() => openModal('sanity')}>
+          <button className="attribute-btn sanity" onClick={() => openModal('sanity')}>
             <span className={showValues.sanity ? 'fade-out' : 'fade-in'}>{attributeLabels.sanity}</span>
             <span className={showValues.sanity ? 'fade-in' : 'fade-out'}>{attributes.sanity}</span>
           </button>
         </div>
 
         <div className="attribute-row">
-          <button className="attribute-btn" onClick={() => openModal('resources')}>
+          <button className="attribute-btn resources" onClick={() => openModal('resources')}>
             <span className={showValues.resources ? 'fade-out' : 'fade-in'}>{attributeLabels.resources}</span>
             <span className={showValues.resources ? 'fade-in' : 'fade-out'}>{attributes.resources}</span>
           </button>
-          <button className="attribute-btn" onClick={() => openModal('clues')}>
+          <button className="attribute-btn clues" onClick={() => openModal('clues')}>
             <span className={showValues.clues ? 'fade-out' : 'fade-in'}>{attributeLabels.clues}</span>
             <span className={showValues.clues ? 'fade-in' : 'fade-out'}>{attributes.clues}</span>
           </button>
-          <button className="attribute-btn" onClick={() => openModal('doom')}>
+          <button className="attribute-btn doom" onClick={() => openModal('doom')}>
             <span className={showValues.doom ? 'fade-out' : 'fade-in'}>{attributeLabels.doom}</span>
             <span className={showValues.doom ? 'fade-in' : 'fade-out'}>{attributes.doom}</span>
           </button>
@@ -139,7 +139,7 @@ export default function AttributesSection({ attributes, onAttributeChange, onRol
 
       {modalOpen && selectedAttribute && (
         <div className="modal-overlay" onClick={closeModal}>
-          <div className="modal-content" onClick={(e) => e.stopPropagation()}>
+          <div className={`modal-content ${selectedAttribute}`} onClick={(e) => e.stopPropagation()}>
             <button className="modal-close" onClick={closeModal}>✕</button>
             
             <h2 className="modal-title">{attributeLabels[selectedAttribute]}</h2>
