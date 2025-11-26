@@ -154,6 +154,8 @@ function App() {
         <AttributesSection
           attributes={gameState[activeGame].attributes}
           onAttributeChange={updateAttribute}
+          onRollDice={rollDice}
+          diceValue={gameState[activeGame].diceRoll}
         />
 
         <AbilitiesSection
