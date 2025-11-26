@@ -35,12 +35,14 @@ function App() {
   const [showSecretsView, setShowSecretsView] = useState(false);
   const [bookmarkModalOpen, setBookmarkModalOpen] = useState(false);
   const [bookmarkInput, setBookmarkInput] = useState('');
+  const [selectedStars, setSelectedStars] = useState(0);
+  const [showRunHistoryModal, setShowRunHistoryModal] = useState(false);
   const [gameState, setGameState] = useState<AppState>(() => {
     // Load from localStorage or initialize
     const saved = localStorage.getItem(STORAGE_KEY);
     const defaultState: AppState = {
-      TDOA: { currentCharacterName: '', characters: {}, foundSecrets: [], bookmark: 0 },
-      TTOI: { currentCharacterName: '', characters: {}, foundSecrets: [], bookmark: 0 },
+      TDOA: { currentCharacterName: '', characters: {}, foundSecrets: [], bookmark: 0, completedRuns: [] },
+      TTOI: { currentCharacterName: '', characters: {}, foundSecrets: [], bookmark: 0, completedRuns: [] },
       shared: { diceRoll: 1 }
     };
     
@@ -55,13 +57,15 @@ function App() {
               currentCharacterName: parsed.TDOA?.currentCharacterName || '',
               characters: parsed.TDOA?.characters || {},
               foundSecrets: parsed.TDOA?.foundSecrets || [],
-              bookmark: parsed.TDOA?.bookmark || 0
+              bookmark: parsed.TDOA?.bookmark || 0,
+              completedRuns: parsed.TDOA?.completedRuns || []
             },
             TTOI: {
               currentCharacterName: parsed.TTOI?.currentCharacterName || '',
               characters: parsed.TTOI?.characters || {},
               foundSecrets: parsed.TTOI?.foundSecrets || [],
-              bookmark: parsed.TTOI?.bookmark || 0
+              bookmark: parsed.TTOI?.bookmark || 0,
+              completedRuns: parsed.TTOI?.completedRuns || []
             },
             shared: {
               diceRoll: parsed.shared?.diceRoll || 1
@@ -86,7 +90,8 @@ function App() {
             currentCharacterName: charName,
             characters,
             foundSecrets: [], // Initialize empty foundSecrets
-            bookmark: 0 // Initialize bookmark
+            bookmark: 0, // Initialize bookmark
+            completedRuns: [] // Initialize completedRuns
           };
         };
         
@@ -269,6 +274,7 @@ function App() {
     const charName = gameState[activeGame].currentCharacterName;
     if (!charName) return;
     
+    setSelectedStars(0); // Reset to 0 stars
     setFinishRunModalOpen(true);
   };
 
@@ -285,17 +291,28 @@ function App() {
       const currentFoundSecrets = prev[activeGame].foundSecrets;
       const newFoundSecrets = [...new Set([...currentFoundSecrets, ...(character?.secrets || [])])];
       
+      // Create completed run entry
+      const completedRun = {
+        characterName: charName,
+        timestamp: Date.now(),
+        secrets: character?.secrets || [],
+        stars: selectedStars
+      };
+      
       return {
         ...prev,
         [activeGame]: {
           currentCharacterName: '',
           characters: newCharacters,
-          foundSecrets: newFoundSecrets
+          foundSecrets: newFoundSecrets,
+          bookmark: 0,
+          completedRuns: [...prev[activeGame].completedRuns, completedRun]
         }
       };
     });
     
     setFinishRunModalOpen(false);
+    setShowRunHistoryModal(true);
   };
 
   const cancelFinishRun = () => {
@@ -460,10 +477,77 @@ function App() {
               <br />
               All saved data for <strong>{gameState[activeGame].currentCharacterName}</strong> in {GAME_TITLES[activeGame]} will be cleared.
             </p>
+            <div className="star-selection">
+              <p className="star-label">How many stars did you earn?</p>
+              <ButtonGroup variant="contained" className="star-button-group">
+                {[0, 1, 2, 3, 4].map(stars => (
+                  <Button
+                    key={stars}
+                    className={`star-btn ${selectedStars === stars ? 'selected' : ''}`}
+                    onClick={() => setSelectedStars(stars)}
+                  >
+                    {stars}
+                  </Button>
+                ))}
+              </ButtonGroup>
+            </div>
             <div className="modal-controls">
               <button className="modal-btn decrement-btn" onClick={cancelFinishRun}>Cancel</button>
               <button className="modal-btn increment-btn" onClick={confirmFinishRun}>Finish Run</button>
             </div>
+          </div>
+        </div>
+      )}
+
+      {showRunHistoryModal && (
+        <div className="modal-overlay" onClick={() => setShowRunHistoryModal(false)}>
+          <div className="modal-content run-history-modal" onClick={(e) => e.stopPropagation()}>
+            <button className="modal-close" onClick={() => setShowRunHistoryModal(false)}>✕</button>
+            <h2 className="modal-title">Run History - {GAME_TITLES[activeGame]}</h2>
+            
+            {gameState[activeGame].completedRuns.length === 0 ? (
+              <p className="run-history-empty">No completed runs yet.</p>
+            ) : (
+              <div className="run-history-list">
+                {gameState[activeGame].completedRuns.map((run, index) => (
+                  <div key={index} className="run-history-item">
+                    <div className="run-history-header">
+                      <h3 className="run-character-name">{run.characterName}</h3>
+                      <div className="run-stars">
+                        {'⭐'.repeat(run.stars)}
+                        {run.stars === 0 && <span className="no-stars">No stars</span>}
+                      </div>
+                    </div>
+                    <p className="run-timestamp">
+                      {new Date(run.timestamp).toLocaleString('en-US', {
+                        month: 'long',
+                        day: 'numeric',
+                        year: 'numeric',
+                        hour: 'numeric',
+                        minute: '2-digit',
+                        hour12: true
+                      })}
+                    </p>
+                    {run.secrets.length > 0 ? (
+                      <div className="run-secrets">
+                        <p className="run-secrets-label">Secrets discovered:</p>
+                        <ul className="run-secrets-list">
+                          {run.secrets.map((secret, secretIndex) => (
+                            <li key={secretIndex}>{secret}</li>
+                          ))}
+                        </ul>
+                      </div>
+                    ) : (
+                      <p className="run-no-secrets">No secrets discovered</p>
+                    )}
+                  </div>
+                ))}
+              </div>
+            )}
+            
+            <button className="modal-btn increment-btn" onClick={() => setShowRunHistoryModal(false)}>
+              Close
+            </button>
           </div>
         </div>
       )}

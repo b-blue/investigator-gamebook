@@ -45,11 +45,19 @@ export interface CharacterState {
   secrets: string[]; // Array of secret names for this character's run
 }
 
+export interface CompletedRun {
+  characterName: string;
+  timestamp: number; // Unix timestamp
+  secrets: string[]; // Secrets found in this run
+  stars: number; // 0-4 stars
+}
+
 export interface GameState {
   currentCharacterName: string;
   characters: Record<string, CharacterState>; // Map of character name to their state
   foundSecrets: string[]; // All secrets found across all runs in this campaign
   bookmark: number; // Saved page number for this campaign
+  completedRuns: CompletedRun[]; // History of completed runs
 }
 
 export interface SharedState {
