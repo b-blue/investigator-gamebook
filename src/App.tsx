@@ -33,33 +33,58 @@ function App() {
   const [gameState, setGameState] = useState<AppState>(() => {
     // Load from localStorage or initialize
     const saved = localStorage.getItem(STORAGE_KEY);
-    const defaultState = {
-      TDOA: { characterName: '', diceRoll: 1, attributes: DEFAULT_ATTRIBUTES, abilities: [], weaknesses: [], items: [], secrets: [] },
-      TTOI: { characterName: '', diceRoll: 1, attributes: DEFAULT_ATTRIBUTES, abilities: [], weaknesses: [], items: [], secrets: [] }
+    const defaultState: AppState = {
+      TDOA: { currentCharacterName: '', characters: {} },
+      TTOI: { currentCharacterName: '', characters: {} },
+      shared: { diceRoll: 1, secrets: [] }
     };
     
     if (saved) {
       try {
         const parsed = JSON.parse(saved);
-        // Ensure all properties exist for backward compatibility
+        
+        // Check if it's the new format
+        if (parsed.TDOA?.characters !== undefined) {
+          return {
+            TDOA: {
+              currentCharacterName: parsed.TDOA?.currentCharacterName || '',
+              characters: parsed.TDOA?.characters || {}
+            },
+            TTOI: {
+              currentCharacterName: parsed.TTOI?.currentCharacterName || '',
+              characters: parsed.TTOI?.characters || {}
+            },
+            shared: {
+              diceRoll: parsed.shared?.diceRoll || 1,
+              secrets: parsed.shared?.secrets || []
+            }
+          };
+        }
+        
+        // Migrate old format to new format
+        const migrateGame = (oldGame: any) => {
+          const charName = oldGame?.characterName || '';
+          const characters: Record<string, any> = {};
+          if (charName) {
+            characters[charName] = {
+              attributes: oldGame?.attributes || DEFAULT_ATTRIBUTES,
+              abilities: oldGame?.abilities || [],
+              weaknesses: oldGame?.weaknesses || [],
+              items: oldGame?.items || []
+            };
+          }
+          return {
+            currentCharacterName: charName,
+            characters
+          };
+        };
+        
         return {
-          TDOA: {
-            characterName: parsed.TDOA?.characterName || '',
-            diceRoll: parsed.TDOA?.diceRoll || 1,
-            attributes: parsed.TDOA?.attributes || DEFAULT_ATTRIBUTES,
-            abilities: parsed.TDOA?.abilities || [],
-            weaknesses: parsed.TDOA?.weaknesses || [],
-            items: parsed.TDOA?.items || [],
-            secrets: parsed.TDOA?.secrets || []
-          },
-          TTOI: {
-            characterName: parsed.TTOI?.characterName || '',
-            diceRoll: parsed.TTOI?.diceRoll || 1,
-            attributes: parsed.TTOI?.attributes || DEFAULT_ATTRIBUTES,
-            abilities: parsed.TTOI?.abilities || [],
-            weaknesses: parsed.TTOI?.weaknesses || [],
-            items: parsed.TTOI?.items || [],
-            secrets: parsed.TTOI?.secrets || []
+          TDOA: migrateGame(parsed.TDOA),
+          TTOI: migrateGame(parsed.TTOI),
+          shared: {
+            diceRoll: parsed.shared?.diceRoll || parsed.TDOA?.diceRoll || 1,
+            secrets: parsed.shared?.secrets || parsed.TDOA?.secrets || []
           }
         };
       } catch {
@@ -79,76 +104,140 @@ function App() {
     const newRoll = Math.floor(Math.random() * 6) + 1;
     setGameState(prev => ({
       ...prev,
-      [activeGame]: {
-        ...prev[activeGame],
+      shared: {
+        ...prev.shared,
         diceRoll: newRoll
       }
     }));
   };
 
-  const handleCharacterSelect = (character: CharacterType) => {
-    setGameState(prev => ({
-      ...prev,
-      [activeGame]: {
-        ...prev[activeGame],
-        characterName: character.name,
-        attributes: character.attributes,
-        abilities: character.abilities,
-        weaknesses: character.weaknesses,
-        items: character.items
-        // secrets remain unchanged
+  // Helper to get current character state
+  const getCurrentCharacter = () => {
+    const charName = gameState[activeGame].currentCharacterName;
+    return charName && gameState[activeGame].characters[charName]
+      ? gameState[activeGame].characters[charName]
+      : { attributes: DEFAULT_ATTRIBUTES, abilities: [], weaknesses: [], items: [] };
+  };
+
+  const handleCharacterSelect = (character: CharacterType, mode: 'restart' | 'load') => {
+    setGameState(prev => {
+      const currentGame = prev[activeGame];
+      const newCharacters = { ...currentGame.characters };
+      
+      if (mode === 'restart') {
+        // Restart mode: overwrite with character defaults
+        newCharacters[character.name] = {
+          attributes: character.attributes,
+          abilities: character.abilities,
+          weaknesses: character.weaknesses,
+          items: character.items
+        };
       }
-    }));
+      // Load mode: character already exists in map, just switch to it
+      
+      return {
+        ...prev,
+        [activeGame]: {
+          ...currentGame,
+          currentCharacterName: character.name,
+          characters: newCharacters
+        }
+      };
+    });
   };
 
   const updateAttribute = (attrName: keyof typeof DEFAULT_ATTRIBUTES, value: number) => {
-    setGameState(prev => ({
-      ...prev,
-      [activeGame]: {
-        ...prev[activeGame],
-        attributes: {
-          ...prev[activeGame].attributes,
-          [attrName]: value
+    setGameState(prev => {
+      const charName = prev[activeGame].currentCharacterName;
+      if (!charName) return prev;
+      
+      return {
+        ...prev,
+        [activeGame]: {
+          ...prev[activeGame],
+          characters: {
+            ...prev[activeGame].characters,
+            [charName]: {
+              ...prev[activeGame].characters[charName],
+              attributes: {
+                ...prev[activeGame].characters[charName].attributes,
+                [attrName]: value
+              }
+            }
+          }
         }
-      }
-    }));
+      };
+    });
   };
 
   const updateItems = (items: string[]) => {
-    setGameState(prev => ({
-      ...prev,
-      [activeGame]: {
-        ...prev[activeGame],
-        items
-      }
-    }));
+    setGameState(prev => {
+      const charName = prev[activeGame].currentCharacterName;
+      if (!charName) return prev;
+      
+      return {
+        ...prev,
+        [activeGame]: {
+          ...prev[activeGame],
+          characters: {
+            ...prev[activeGame].characters,
+            [charName]: {
+              ...prev[activeGame].characters[charName],
+              items
+            }
+          }
+        }
+      };
+    });
   };
 
   const updateAbilities = (abilities: string[]) => {
-    setGameState(prev => ({
-      ...prev,
-      [activeGame]: {
-        ...prev[activeGame],
-        abilities
-      }
-    }));
+    setGameState(prev => {
+      const charName = prev[activeGame].currentCharacterName;
+      if (!charName) return prev;
+      
+      return {
+        ...prev,
+        [activeGame]: {
+          ...prev[activeGame],
+          characters: {
+            ...prev[activeGame].characters,
+            [charName]: {
+              ...prev[activeGame].characters[charName],
+              abilities
+            }
+          }
+        }
+      };
+    });
   };
 
   const updateWeaknesses = (weaknesses: string[]) => {
-    setGameState(prev => ({
-      ...prev,
-      [activeGame]: {
-        ...prev[activeGame],
-        weaknesses
-      }
-    }));
+    setGameState(prev => {
+      const charName = prev[activeGame].currentCharacterName;
+      if (!charName) return prev;
+      
+      return {
+        ...prev,
+        [activeGame]: {
+          ...prev[activeGame],
+          characters: {
+            ...prev[activeGame].characters,
+            [charName]: {
+              ...prev[activeGame].characters[charName],
+              weaknesses
+            }
+          }
+        }
+      };
+    });
   };
 
   const updateSecrets = (secrets: string[]) => {
     setGameState(prev => ({
       ...prev,
-      [activeGame]: {
-        ...prev[activeGame],
+      shared: {
+        ...prev.shared,
         secrets
       }
     }));
@@ -160,39 +249,42 @@ function App() {
 
       <div className="header">
         <h1 className="title">{GAME_TITLES[activeGame]}</h1>
-        <DiceRoller value={gameState[activeGame].diceRoll} onRoll={rollDice} />
+        <DiceRoller value={gameState.shared.diceRoll} onRoll={rollDice} />
       </div>
 
       <div className="content">
-        <Character 
-          characterName={gameState[activeGame].characterName}
+        <Character
+          characterName={gameState[activeGame].currentCharacterName}
+          savedCharacters={Object.keys(gameState[activeGame].characters)}
+          currentAttributes={getCurrentCharacter().attributes}
+          currentAbilities={getCurrentCharacter().abilities}
+          currentWeaknesses={getCurrentCharacter().weaknesses}
+          currentItems={getCurrentCharacter().items}
           onCharacterSelect={handleCharacterSelect}
-        />
-
-        <AttributesSection
-          attributes={gameState[activeGame].attributes}
+        />        <AttributesSection
+          attributes={getCurrentCharacter().attributes}
           onAttributeChange={updateAttribute}
           onRollDice={rollDice}
-          diceValue={gameState[activeGame].diceRoll}
+          diceValue={gameState.shared.diceRoll}
         />
 
         <AbilitiesSection
-          items={gameState[activeGame].abilities}
+          items={getCurrentCharacter().abilities}
           onItemsChange={updateAbilities}
         />
 
         <WeaknessesSection
-          items={gameState[activeGame].weaknesses}
+          items={getCurrentCharacter().weaknesses}
           onItemsChange={updateWeaknesses}
         />
 
         <ItemsSection
-          items={gameState[activeGame].items}
+          items={getCurrentCharacter().items}
           onItemsChange={updateItems}
         />
 
         <SecretsSection
-          items={gameState[activeGame].secrets}
+          items={gameState.shared.secrets}
           onItemsChange={updateSecrets}
         />
       </div>

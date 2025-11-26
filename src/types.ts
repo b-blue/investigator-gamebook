@@ -38,18 +38,25 @@ export interface Character {
   items: string[];
 }
 
-export interface GameState {
-  characterName: string;
-  diceRoll: number;
+export interface CharacterState {
   attributes: Attributes;
   abilities: string[]; // Array of ability names
   weaknesses: string[]; // Array of weakness names
   items: string[]; // Array of item names
-  secrets: string[]; // Array of secret names
-  // Additional character sheet data will be added in future prompts
+}
+
+export interface GameState {
+  currentCharacterName: string;
+  characters: Record<string, CharacterState>; // Map of character name to their state
+}
+
+export interface SharedState {
+  diceRoll: number;
+  secrets: string[]; // Array of secret names - shared across both games
 }
 
 export interface AppState {
   TDOA: GameState;
   TTOI: GameState;
+  shared: SharedState;
 }

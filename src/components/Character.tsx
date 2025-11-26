@@ -14,34 +14,72 @@ interface CharacterData {
 
 interface CharacterProps {
   characterName: string;
-  onCharacterSelect: (character: CharacterData) => void;
+  savedCharacters: string[]; // Array of character names that have been played in this game
+  currentAttributes: Attributes;
+  currentAbilities: string[];
+  currentWeaknesses: string[];
+  currentItems: string[];
+  onCharacterSelect: (character: CharacterData, mode: 'restart' | 'load') => void;
 }
 
-export default function Character({ characterName, onCharacterSelect }: CharacterProps) {
+export default function Character({ 
+  characterName, 
+  savedCharacters,
+  currentAttributes: _currentAttributes,
+  currentAbilities: _currentAbilities,
+  currentWeaknesses: _currentWeaknesses,
+  currentItems: _currentItems,
+  onCharacterSelect 
+}: CharacterProps) {
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const [confirmModalOpen, setConfirmModalOpen] = useState(false);
+  const [loadRestartModalOpen, setLoadRestartModalOpen] = useState(false);
   const [selectedCharacter, setSelectedCharacter] = useState<CharacterData | null>(null);
 
   const characters: CharacterData[] = charactersData as CharacterData[];
 
   const handleCharacterClick = (character: CharacterData) => {
     if (characterName === '') {
-      // No confirmation needed if current character is empty
-      onCharacterSelect(character);
+      // No character selected, load new character directly
+      onCharacterSelect(character, 'restart');
       setDropdownOpen(false);
-    } else {
-      // Show confirmation modal
+    } else if (savedCharacters.includes(character.name)) {
+      // This character has been played before in this game - ask load or restart
+      setSelectedCharacter(character);
+      setLoadRestartModalOpen(true);
+      setDropdownOpen(false);
+    } else if (characterName !== character.name) {
+      // Switching to a different character that hasn't been played - show confirmation
       setSelectedCharacter(character);
       setConfirmModalOpen(true);
+      setDropdownOpen(false);
+    } else {
+      // Same character, no action needed
       setDropdownOpen(false);
     }
   };
 
   const handleConfirmChange = () => {
     if (selectedCharacter) {
-      onCharacterSelect(selectedCharacter);
+      onCharacterSelect(selectedCharacter, 'restart');
       setSelectedCharacter(null);
       setConfirmModalOpen(false);
+    }
+  };
+
+  const handleLoadCharacter = () => {
+    if (selectedCharacter) {
+      onCharacterSelect(selectedCharacter, 'load');
+      setSelectedCharacter(null);
+      setLoadRestartModalOpen(false);
+    }
+  };
+
+  const handleRestartCharacter = () => {
+    if (selectedCharacter) {
+      onCharacterSelect(selectedCharacter, 'restart');
+      setSelectedCharacter(null);
+      setLoadRestartModalOpen(false);
     }
   };
 
@@ -153,6 +191,29 @@ export default function Character({ characterName, onCharacterSelect }: Characte
               </button>
               <button className="modal-btn increment-btn" onClick={handleConfirmChange}>
                 Confirm
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {loadRestartModalOpen && selectedCharacter && (
+        <div className="modal-overlay" onClick={() => setLoadRestartModalOpen(false)}>
+          <div className="modal-content" onClick={(e) => e.stopPropagation()}>
+            <button className="modal-close" onClick={() => setLoadRestartModalOpen(false)}>✕</button>
+            
+            <h2 className="modal-title">Load or Restart Character?</h2>
+            
+            <p className="modal-message">
+              You've played <strong>{selectedCharacter.name}</strong> before in this game. Would you like to load your saved progress or restart with fresh stats?
+            </p>
+            
+            <div className="modal-controls">
+              <button className="modal-btn decrement-btn" onClick={handleRestartCharacter}>
+                Restart Fresh
+              </button>
+              <button className="modal-btn increment-btn" onClick={handleLoadCharacter}>
+                Load Saved
               </button>
             </div>
           </div>
