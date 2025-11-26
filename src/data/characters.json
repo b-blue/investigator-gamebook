@@ -1,0 +1,29 @@
+[
+  {
+    "name": "Agnes Baker",
+    "description": "The Waitress",
+    "attributes": {
+      "willpower": 5,
+      "intellect": 2,
+      "combat": 2,
+      "health": 6,
+      "sanity": 8,
+      "resources": 0,
+      "clues": 0,
+      "doom": 0
+    },
+    "abilities": [
+      "Sorcerer",
+      "Mystic",
+      "Sorcery",
+      "Arcane Studies"
+    ],
+    "weaknesses": [
+      "Dark Memories",
+      "Haunted"
+    ],
+    "items": [
+      "Heirloom of Hyperborea"
+    ]
+  }
+]

@@ -33,7 +33,7 @@ export default function WeaknessesSection({ items, onItemsChange }: ItemsSection
   };
 
   return (
-    <div className="items-section">
+    <div className="items-section weaknesses-section">
       <div 
         className={`items-collapsed-wrapper ${!expanded && items.length > 0 ? 'has-items' : ''}`}
       >

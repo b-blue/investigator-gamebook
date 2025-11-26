@@ -13,5 +13,8 @@ Intellect: 2
 Combat: 2
 Health: 6
 Sanity: 8
+Starting Abilties, in order: Sorcerer, Mystic, Sorcery, Arcane Studies
+Starting Weaknesses, in order: Dark Memories, Haunted
 Starting Items, in order: Heirloom of Hyperborea
-Starting Abilties, in order: 
+
+Some of the abilities, weaknesses and items that a character starts with will apply certain rules to the game which also need to be tracked, but we will address that later. Currently we need to focus on the data structure we can use to populate the characters.json file. 

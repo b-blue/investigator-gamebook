@@ -31,7 +31,7 @@ export default function SecretsSection({ items, onItemsChange }: ItemsSectionPro
   };
 
   return (
-    <div className="items-section">
+    <div className="items-section secrets-section">
       <div 
         className={`items-collapsed-wrapper ${!expanded && items.length > 0 ? 'has-items' : ''}`}
       >

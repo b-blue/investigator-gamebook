@@ -65,35 +65,9 @@
   overflow-y: auto;
 }
 
-/* Character Name Section */
-.character-name-section {
+/* Character Section */
+.character-section {
   margin-bottom: 1.5rem;
-}
-
-.character-name-input {
-  width: 100%;
-  padding: 0.75rem 1rem;
-  font-size: 1.125rem;
-  font-weight: 500;
-  font-family: inherit;
-  background-color: #1a1a1a;
-  color: rgba(255, 255, 255, 0.87);
-  border: 2px solid #333;
-  border-radius: 8px;
-  outline: none;
-  transition: border-color 0.3s ease;
-}
-
-.character-name-input::placeholder {
-  color: rgba(255, 255, 255, 0.4);
-}
-
-.character-name-input:focus {
-  border-color: #646cff;
-}
-
-.character-name-input:hover {
-  border-color: #444;
 }
 
 /* Attributes Section */
@@ -253,6 +227,19 @@
   font-size: 1.5rem;
   font-weight: 600;
   color: rgba(255, 255, 255, 0.87);
+}
+
+.modal-message {
+  font-size: 1rem;
+  line-height: 1.6;
+  color: rgba(255, 255, 255, 0.7);
+  text-align: center;
+  margin: 0;
+}
+
+.modal-message strong {
+  color: rgba(255, 255, 255, 0.95);
+  font-weight: 600;
 }
 
 .modal-value {
@@ -529,6 +516,70 @@
   background-color: #c53030;
   border-color: #c53030;
   color: white;
+}
+
+/* Section-specific styling */
+.abilities-section .collapsed-item {
+  background-color: #1a2a1a;
+}
+
+.abilities-section .items-collapsed-wrapper.has-items:hover .collapsed-item {
+  background-color: #1f3d1f !important;
+}
+
+.abilities-section .items-collapsed-list:hover .collapsed-item {
+  background-color: #1f3d1f !important;
+}
+
+.abilities-section .item-card {
+  background-color: #1a2a1a;
+  border-color: #336633;
+}
+
+.abilities-section .item-card:hover {
+  border-color: #448844;
+}
+
+.weaknesses-section .collapsed-item {
+  background-color: #2a1a1a;
+}
+
+.weaknesses-section .items-collapsed-wrapper.has-items:hover .collapsed-item {
+  background-color: #3d1f1f !important;
+}
+
+.weaknesses-section .items-collapsed-list:hover .collapsed-item {
+  background-color: #3d1f1f !important;
+}
+
+.weaknesses-section .item-card {
+  background-color: #2a1a1a;
+  border-color: #663333;
+}
+
+.weaknesses-section .item-card:hover {
+  border-color: #884444;
+}
+
+.secrets-section .collapsed-item {
+  background-color: #2a2a1a;
+}
+
+.secrets-section .items-collapsed-wrapper.has-items:hover .collapsed-item {
+  background-color: #3d3d1f !important;
+}
+
+.secrets-section .items-collapsed-list:hover .collapsed-item {
+  background-color: #3d3d1f !important;
+}
+
+.secrets-section .item-card {
+  background-color: #2a2a1a;
+  border-color: #666633;
+}
+
+.secrets-section .item-card:hover {
+  border-color: #888844;
 }
 
 /* Responsive design for mobile portrait */

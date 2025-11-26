@@ -29,6 +29,15 @@ export interface Secret {
   isChecked: boolean;
 }
 
+export interface Character {
+  name: string;
+  description: string;
+  attributes: Attributes;
+  abilities: string[];
+  weaknesses: string[];
+  items: string[];
+}
+
 export interface GameState {
   characterName: string;
   diceRoll: number;

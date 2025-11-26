@@ -1,9 +1,9 @@
 import { useState, useEffect } from 'react'
 import './App.css'
-import type { GameType, AppState } from './types'
+import type { GameType, AppState, Character as CharacterType } from './types'
 import GameTabs from './components/GameTabs'
 import DiceRoller from './components/DiceRoller'
-import CharacterName from './components/CharacterName'
+import Character from './components/Character'
 import AttributesSection from './components/AttributesSection'
 import ItemsSection from './components/ItemsSection'
 import AbilitiesSection from './components/AbilitiesSection'
@@ -86,12 +86,17 @@ function App() {
     }));
   };
 
-  const updateCharacterName = (name: string) => {
+  const handleCharacterSelect = (character: CharacterType) => {
     setGameState(prev => ({
       ...prev,
       [activeGame]: {
         ...prev[activeGame],
-        characterName: name
+        characterName: character.name,
+        attributes: character.attributes,
+        abilities: character.abilities,
+        weaknesses: character.weaknesses,
+        items: character.items
+        // secrets remain unchanged
       }
     }));
   };
@@ -159,9 +164,9 @@ function App() {
       </div>
 
       <div className="content">
-        <CharacterName 
-          value={gameState[activeGame].characterName}
-          onChange={updateCharacterName}
+        <Character 
+          characterName={gameState[activeGame].characterName}
+          onCharacterSelect={handleCharacterSelect}
         />
 
         <AttributesSection
