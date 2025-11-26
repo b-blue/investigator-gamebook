@@ -47,7 +47,12 @@ export default function ItemsSection({ items, onItemsChange }: ItemsSectionProps
           )}
           {!expanded && items.length > 0 && (
             <div className="collapsed-item first-item">
-              {items[0]}
+              <div className="item-name">{items[0]}</div>
+              {availableItems.find(item => item.name === items[0])?.description && (
+                <div className="item-description">
+                  {availableItems.find(item => item.name === items[0])?.description}
+                </div>
+              )}
             </div>
           )}
           <span className={`expand-icon ${expanded ? 'expanded' : ''}`}>▶</span>
@@ -58,11 +63,17 @@ export default function ItemsSection({ items, onItemsChange }: ItemsSectionProps
             className="items-collapsed-list"
             onClick={() => setExpanded(!expanded)}
           >
-            {items.slice(1).map((item, index) => (
-              <div key={index + 1} className="collapsed-item">
-                {item}
-              </div>
-            ))}
+            {items.slice(1).map((itemName, index) => {
+              const itemData = availableItems.find(item => item.name === itemName);
+              return (
+                <div key={index + 1} className="collapsed-item">
+                  <div className="item-name">{itemName}</div>
+                  {itemData?.description && (
+                    <div className="item-description">{itemData.description}</div>
+                  )}
+                </div>
+              );
+            })}
           </div>
         )}
       </div>

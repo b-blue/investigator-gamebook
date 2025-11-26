@@ -23,9 +23,9 @@ export default function AttributesSection({ attributes, onAttributeChange }: Att
             <span>W:{attributes.willpower}</span>
             <span>I:{attributes.intellect}</span>
             <span>C:{attributes.combat}</span>
-            <span>A:{attributes.agility}</span>
             <span>H:{attributes.health}</span>
             <span>S:{attributes.sanity}</span>
+            <span>R:{attributes.resources}</span>
             <span>Cl:{attributes.clues}</span>
             <span>D:{attributes.doom}</span>
           </div>
@@ -67,15 +67,6 @@ export default function AttributesSection({ attributes, onAttributeChange }: Att
 
           <div className="attribute-group">
             <div className="attribute-item">
-              <label>Agility</label>
-              <input
-                type="number"
-                className="attribute-input"
-                value={attributes.agility}
-                onChange={(e) => onAttributeChange('agility', parseInt(e.target.value) || 0)}
-              />
-            </div>
-            <div className="attribute-item">
               <label>Health</label>
               <input
                 type="number"
@@ -91,6 +82,15 @@ export default function AttributesSection({ attributes, onAttributeChange }: Att
                 className="attribute-input"
                 value={attributes.sanity}
                 onChange={(e) => onAttributeChange('sanity', parseInt(e.target.value) || 0)}
+              />
+            </div>
+            <div className="attribute-item">
+              <label>Resources</label>
+              <input
+                type="number"
+                className="attribute-input"
+                value={attributes.resources}
+                onChange={(e) => onAttributeChange('resources', parseInt(e.target.value) || 0)}
               />
             </div>
           </div>

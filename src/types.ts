@@ -4,9 +4,9 @@ export interface Attributes {
   willpower: number;
   intellect: number;
   combat: number;
-  agility: number;
   health: number;
   sanity: number;
+  resources: number;
   clues: number;
   doom: number;
 }

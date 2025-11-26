@@ -8,7 +8,7 @@ import AttributesSection from './components/AttributesSection'
 import ItemsSection from './components/ItemsSection'
 
 const GAME_TITLES = {
-  TDOA: 'The Darkness over Arkham',
+  TDOA: 'The Darkness Over Arkham',
   TTOI: 'The Tides of Innsmouth'
 };
 
@@ -18,9 +18,9 @@ const DEFAULT_ATTRIBUTES = {
   willpower: 0,
   intellect: 0,
   combat: 0,
-  agility: 0,
   health: 0,
   sanity: 0,
+  resources: 0,
   clues: 0,
   doom: 0
 };
@@ -38,18 +38,32 @@ function App() {
     if (saved) {
       try {
         const parsed = JSON.parse(saved);
+        
+        // Migration function to convert old agility to resources
+        const migrateAttributes = (attrs: any) => {
+          if (!attrs) return DEFAULT_ATTRIBUTES;
+          const migrated = { ...DEFAULT_ATTRIBUTES, ...attrs };
+          // If old agility exists and resources doesn't, migrate it
+          if ('agility' in attrs && !('resources' in attrs)) {
+            migrated.resources = attrs.agility;
+          }
+          // Remove agility if it exists
+          delete (migrated as any).agility;
+          return migrated;
+        };
+        
         // Ensure all properties exist for backward compatibility
         return {
           TDOA: {
             characterName: parsed.TDOA?.characterName || '',
             diceRoll: parsed.TDOA?.diceRoll || 1,
-            attributes: parsed.TDOA?.attributes || DEFAULT_ATTRIBUTES,
+            attributes: migrateAttributes(parsed.TDOA?.attributes),
             items: parsed.TDOA?.items || []
           },
           TTOI: {
             characterName: parsed.TTOI?.characterName || '',
             diceRoll: parsed.TTOI?.diceRoll || 1,
-            attributes: parsed.TTOI?.attributes || DEFAULT_ATTRIBUTES,
+            attributes: migrateAttributes(parsed.TTOI?.attributes),
             items: parsed.TTOI?.items || []
           }
         };
