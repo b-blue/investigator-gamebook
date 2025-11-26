@@ -329,6 +329,9 @@ function App() {
           onAttributeChange={updateAttribute}
           onRollDice={rollDice}
           diceValue={gameState.shared.diceRoll}
+          currentAbilities={getCurrentCharacter().abilities}
+          currentWeaknesses={getCurrentCharacter().weaknesses}
+          currentItems={getCurrentCharacter().items}
         />
 
         <AbilitiesSection

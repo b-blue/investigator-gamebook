@@ -494,6 +494,134 @@
   font-size: 2rem;
 }
 
+/* Modal Related Items */
+.modal-related-items {
+  width: 100%;
+  margin-top: 1.5rem;
+  padding-top: 1.5rem;
+  border-top: 2px solid #333;
+}
+
+.modal-related-title {
+  margin: 0 0 1rem 0;
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.87);
+  text-align: center;
+}
+
+.modal-related-items .items-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  max-height: 300px;
+  overflow-y: auto;
+}
+
+.modal-related-items .item-card {
+  background-color: #242424;
+  border: 1px solid #333;
+  border-radius: 6px;
+  padding: 0.75rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 0.75rem;
+  transition: background-color 0.2s ease;
+}
+
+.modal-related-items .abilities-item {
+  background-color: #1a2a1a;
+  border-color: #336633;
+}
+
+.modal-related-items .weaknesses-item {
+  background-color: #2a1a1a;
+  border-color: #663333;
+}
+
+.modal-related-items .items-item {
+  background-color: #242424;
+  border-color: #333;
+}
+
+/* Result Modal */
+.result-modal {
+  max-width: 350px;
+}
+
+.result-breakdown {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  width: 100%;
+}
+
+.result-line {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 1rem;
+  color: rgba(255, 255, 255, 0.87);
+}
+
+.result-line.penalty {
+  color: #ef4444;
+}
+
+.result-label {
+  font-weight: 500;
+}
+
+.result-number {
+  font-weight: bold;
+  font-size: 1.2rem;
+}
+
+.result-divider {
+  width: 100%;
+  height: 2px;
+  background-color: #333;
+  margin: 0.5rem 0;
+}
+
+.result-final {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+  width: 100%;
+}
+
+.result-final-label {
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.87);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+}
+
+.result-final-value {
+  font-size: 4rem;
+  font-weight: bold;
+  color: #646cff;
+  padding: 1rem 2rem;
+  background-color: #242424;
+  border-radius: 12px;
+  min-width: 120px;
+  text-align: center;
+  animation: pulse 0.3s ease-in-out;
+}
+
+@keyframes pulse {
+  0%, 100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.1);
+  }
+}
+
 /* Items Section */
 .items-section {
   margin-bottom: 1.5rem;

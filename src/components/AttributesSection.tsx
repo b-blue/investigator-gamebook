@@ -1,15 +1,44 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useMemo } from 'react';
 import type { Attributes } from '../types';
+import abilitiesData from '../data/abilities.json';
+import itemsData from '../data/items.json';
+
+interface AbilityData {
+  name: string;
+  description: string;
+  isWeakness: boolean;
+}
+
+interface ItemData {
+  name: string;
+  description: string;
+  isEquipped: boolean;
+}
 
 interface AttributesSectionProps {
   attributes: Attributes;
   onAttributeChange: (attrName: keyof Attributes, value: number) => void;
   onRollDice: () => void;
   diceValue: number;
+  currentAbilities: string[];
+  currentWeaknesses: string[];
+  currentItems: string[];
 }
 
-export default function AttributesSection({ attributes, onAttributeChange, onRollDice, diceValue }: AttributesSectionProps) {
+export default function AttributesSection({ 
+  attributes, 
+  onAttributeChange, 
+  onRollDice, 
+  diceValue,
+  currentAbilities,
+  currentWeaknesses,
+  currentItems
+}: AttributesSectionProps) {
   const [modalOpen, setModalOpen] = useState(false);
+  const [resultModalOpen, setResultModalOpen] = useState(false);
+  const [animatedValue, setAnimatedValue] = useState(1);
+  const [rolledDiceValue, setRolledDiceValue] = useState(1);
+  const [penalty, setPenalty] = useState<{ type: 'health' | 'sanity' | null, value: number }>({ type: null, value: 0 });
   const [selectedAttribute, setSelectedAttribute] = useState<keyof Attributes | null>(null);
   const [showValues, setShowValues] = useState<Record<keyof Attributes, boolean>>({
     willpower: false,
@@ -21,6 +50,40 @@ export default function AttributesSection({ attributes, onAttributeChange, onRol
     clues: false,
     doom: false
   });
+
+  const allAbilities: AbilityData[] = abilitiesData as AbilityData[];
+  const allItems: ItemData[] = itemsData as ItemData[];
+
+  // Filter abilities, weaknesses, and items that mention the selected attribute
+  const relatedItems = useMemo(() => {
+    if (!selectedAttribute) return { abilities: [], weaknesses: [], items: [] };
+    
+    const attributeName = selectedAttribute.toLowerCase();
+    
+    // Get ability/weakness data for current character's abilities and weaknesses
+    const abilities = allAbilities
+      .filter(ability => 
+        !ability.isWeakness && 
+        currentAbilities.includes(ability.name) &&
+        ability.description.toLowerCase().includes(attributeName)
+      );
+    
+    const weaknesses = allAbilities
+      .filter(ability => 
+        ability.isWeakness && 
+        currentWeaknesses.includes(ability.name) &&
+        ability.description.toLowerCase().includes(attributeName)
+      );
+    
+    // Get item data for current character's items
+    const items = allItems
+      .filter(item => 
+        currentItems.includes(item.name) &&
+        item.description.toLowerCase().includes(attributeName)
+      );
+    
+    return { abilities, weaknesses, items };
+  }, [selectedAttribute, currentAbilities, currentWeaknesses, currentItems, allAbilities, allItems]);
 
   // Cycle through showing name (5s) and value (3s) for each attribute
   useEffect(() => {
@@ -67,6 +130,47 @@ export default function AttributesSection({ attributes, onAttributeChange, onRol
   const closeModal = () => {
     setModalOpen(false);
     setSelectedAttribute(null);
+  };
+
+  const handleAttributeRoll = () => {
+    if (!selectedAttribute) return;
+    
+    // Roll the die
+    const diceRoll = Math.floor(Math.random() * 6) + 1;
+    setRolledDiceValue(diceRoll);
+    onRollDice(); // Update global dice display
+    
+    // Calculate base result
+    let result = attributes[selectedAttribute] + diceRoll;
+    let penaltyInfo: { type: 'health' | 'sanity' | null, value: number } = { type: null, value: 0 };
+    
+    // Apply combat penalty if health is below zero
+    if (selectedAttribute === 'combat' && attributes.health < 0) {
+      result += attributes.health; // Add negative health (subtracts from result)
+      penaltyInfo = { type: 'health', value: attributes.health };
+    }
+    
+    // Apply willpower penalty if sanity is below zero
+    if (selectedAttribute === 'willpower' && attributes.sanity < 0) {
+      result += attributes.sanity; // Add negative sanity (subtracts from result)
+      penaltyInfo = { type: 'sanity', value: attributes.sanity };
+    }
+    
+    setPenalty(penaltyInfo);
+    setResultModalOpen(true);
+    
+    // Animate cycling through random values
+    let cycleCount = 0;
+    const maxCycles = 10;
+    const cycleInterval = setInterval(() => {
+      setAnimatedValue(Math.floor(Math.random() * 6) + 1);
+      cycleCount++;
+      
+      if (cycleCount >= maxCycles) {
+        clearInterval(cycleInterval);
+        setAnimatedValue(result);
+      }
+    }, 100);
   };
 
   const increment = () => {
@@ -152,9 +256,77 @@ export default function AttributesSection({ attributes, onAttributeChange, onRol
             </div>
 
             <div className="modal-dice">
-              <button className="dice-button" onClick={onRollDice}>
+              <button className="dice-button" onClick={handleAttributeRoll}>
                 {diceValue}
               </button>
+            </div>
+
+            {(relatedItems.abilities.length > 0 || relatedItems.weaknesses.length > 0 || relatedItems.items.length > 0) && (
+              <div className="modal-related-items">
+                <h3 className="modal-related-title">Related Cards</h3>
+                <div className="items-list">
+                  {relatedItems.abilities.map((ability, index) => (
+                    <div key={`ability-${index}`} className="item-card abilities-item">
+                      <div className="item-info">
+                        <span className="item-name">{ability.name}</span>
+                        <span className="item-description">{ability.description}</span>
+                      </div>
+                    </div>
+                  ))}
+                  {relatedItems.weaknesses.map((weakness, index) => (
+                    <div key={`weakness-${index}`} className="item-card weaknesses-item">
+                      <div className="item-info">
+                        <span className="item-name">{weakness.name}</span>
+                        <span className="item-description">{weakness.description}</span>
+                      </div>
+                    </div>
+                  ))}
+                  {relatedItems.items.map((item, index) => (
+                    <div key={`item-${index}`} className="item-card items-item">
+                      <div className="item-info">
+                        <span className="item-name">{item.name}</span>
+                        <span className="item-description">{item.description}</span>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            )}
+          </div>
+        </div>
+      )}
+
+      {resultModalOpen && selectedAttribute && (
+        <div className="modal-overlay" onClick={() => setResultModalOpen(false)}>
+          <div className="modal-content result-modal" onClick={(e) => e.stopPropagation()}>
+            <button className="modal-close" onClick={() => setResultModalOpen(false)}>✕</button>
+            
+            <h2 className="modal-title">Roll Result</h2>
+            
+            <div className="result-breakdown">
+              <div className="result-line">
+                <span className="result-label">{attributeLabels[selectedAttribute]}:</span>
+                <span className="result-number">{attributes[selectedAttribute]}</span>
+              </div>
+              <div className="result-line">
+                <span className="result-label">Die Roll:</span>
+                <span className="result-number">{rolledDiceValue}</span>
+              </div>
+              {penalty.type && (
+                <div className="result-line penalty">
+                  <span className="result-label">
+                    {penalty.type === 'health' ? 'Loss of Health:' : 'Loss of Sanity:'}
+                  </span>
+                  <span className="result-number">{penalty.value}</span>
+                </div>
+              )}
+            </div>
+            
+            <div className="result-divider"></div>
+            
+            <div className="result-final">
+              <span className="result-final-label">Total:</span>
+              <span className="result-final-value">{animatedValue}</span>
             </div>
           </div>
         </div>
