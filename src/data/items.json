@@ -1,0 +1,152 @@
+[
+  {
+    "isEquipped": false,
+    "name": "Heirloom of Hyperborea",
+    "description": "If you succeed in a test using your WILLPOWER, gain +1 RESOURCE."
+  },
+  {
+    "isEquipped": false,
+    "name": "Hidden Weapon",
+    "description": "Once per adventure you may add +3 to your COMBAT."
+  },
+  {
+    "isEquipped": false,
+    "name": "Reporter's Notebook",
+    "description": "You begin the game with +1 CLUE."
+  },
+  {
+    "isEquipped": false,
+    "name": "Mailbag",
+    "description": "Whenever you gain an item, if you do not already gain a resource, gain 1 resource."
+  },
+  {
+    "isEquipped": false,
+    "name": "Obscure Tome",
+    "description": "You begin the adventure with 2 clues."
+  },
+  {
+    "isEquipped": false,
+    "name": ".45 Automatic",
+    "description": "Start with 6 ammo. When a test allows you to spend a resource to add to your combat, you may spend 1 ammo instead."
+  },
+  {
+    "isEquipped": false,
+    "name": "Whiskey",
+    "description": ""
+  },
+  {
+    "isEquipped": false,
+    "name": "Dr. Blaine's Notebook",
+    "description": ""
+  },
+  {
+    "isEquipped": false,
+    "name": "Toe-Tag",
+    "description": ""
+  },
+  {
+    "isEquipped": false,
+    "name": "Inky Fingers",
+    "description": ""
+  },
+  {
+    "isEquipped": false,
+    "name": "Breadknife",
+    "description": ""
+  },
+  {
+    "isEquipped": false,
+    "name": "Brandy",
+    "description": ""
+  },
+  {
+    "isEquipped": false,
+    "name": "Archibald's Account",
+    "description": ""
+  },
+  {
+    "isEquipped": false,
+    "name": "Pistol",
+    "description": ""
+  },
+  {
+    "isEquipped": false,
+    "name": "Skull Mask",
+    "description": ""
+  },
+  {
+    "isEquipped": false,
+    "name": "Brass Telescope",
+    "description": ""
+  },
+  {
+    "isEquipped": false,
+    "name": "Cultists Robes",
+    "description": ""
+  },
+  {
+    "isEquipped": false,
+    "name": "Lighter",
+    "description": ""
+  },
+  {
+    "isEquipped": false,
+    "name": "Swabbing Alcohol",
+    "description": ""
+  },
+  {
+    "isEquipped": false,
+    "name": "Bonesaw",
+    "description": ""
+  },
+  {
+    "isEquipped": false,
+    "name": "Black Talon",
+    "description": ""
+  },
+  {
+    "isEquipped": false,
+    "name": "Detective Hardin's Card",
+    "description": ""
+  },
+  {
+    "isEquipped": false,
+    "name": "Ceremonial Dagger",
+    "description": ""
+  },
+  {
+    "isEquipped": false,
+    "name": "Key",
+    "description": ""
+  },
+  {
+    "isEquipped": false,
+    "name": "Blueprint",
+    "description": ""
+  },
+  {
+    "isEquipped": false,
+    "name": "Garden Plan",
+    "description": ""
+  },
+  {
+    "isEquipped": false,
+    "name": "Wet Shoes",
+    "description": ""
+  },
+  {
+    "isEquipped": false,
+    "name": "Handkerchief",
+    "description": ""
+  },
+  {
+    "isEquipped": false,
+    "name": "Town Map",
+    "description": ""
+  },
+  {
+    "isEquipped": false,
+    "name": "Flick Knife",
+    "description": ""
+  }
+]

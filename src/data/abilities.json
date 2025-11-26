@@ -1,0 +1,142 @@
+[
+  {
+    "isWeakness": false,
+    "name": "Sorcerer",
+    "description": "Once per adventure you may use your Willpower instead of your Combat in a fight or test"
+  },
+  {
+    "isWeakness": true,
+    "name": "Dark Memories",
+    "description": "Each time you spend a clue, roll a dice. On a roll of a 1, Agnes loses -1 sanity."
+  },
+  {
+    "isWeakness": false,
+    "name": "Boxer",
+    "description": "If you roll a 6 while using your combat, add +1 to your total score (If you are rolling more than one dice, add +1 for each 6 you roll)."
+  },
+  {
+    "isWeakness": true,
+    "name": "Hunted by the Mob",
+    "description": "Each time you gain a resource, roll a die. If the score is below your current number of resources, do not gain a resource."
+  },
+  {
+    "isWeakness": false,
+    "name": "Reporter",
+    "description": "If you roll a 6 while using your intellect, gain +1 clue."
+  },
+  {
+    "isWeakness": true,
+    "name": "Rex's Curse",
+    "description": "If you roll a double when using your intellect or willpower, treat the score on each die as a 1."
+  },
+  {
+    "isWeakness": false,
+    "name": "Nor Gloom of Night",
+    "description": "When you roll less than the required score in any test using your willpower, choose to gain 1 resource, 1 health, or 1 sanity. You may not increase your health or sanity above their starting level using this ability."
+  },
+  {
+    "isWeakness": true,
+    "name": "Called by the Mists",
+    "description": "Whenever you lose sanity, roll one die (If you are in Kingsport, roll two dice and pick the highest). If the score is higher than your current sanity, lose 1 resource."
+  },
+  {
+    "isWeakness": false,
+    "name": "Scholar",
+    "description": "Whenever you spend a clue or resource as part of a test, if the test is successful, gain 1 clue or resource (your choice)."
+  },
+  {
+    "isWeakness": true,
+    "name": "Whispers of the Deep",
+    "description": "Whenver you lose sanity, also lose 1 resource or 1 clue (your choice)."
+  },
+  {
+    "isWeakness": false,
+    "name": "Ex-Con",
+    "description": "You may spend 1 resource to attempt any failed test again. Repeat the test using the same number of dice you used the first time, and counting any other modifiers the same. You can only repeat each failed test once."
+  },
+  {
+    "isWeakness": true,
+    "name": "Hospital Debts",
+    "description": "When you spend a resource, lose one additional resource (if you have one)."
+  },
+  {
+    "isWeakness": false,
+    "name": "Mystic",
+    "description": ""
+  },
+  {
+    "isWeakness": false,
+    "name": "Sorcery",
+    "description": ""
+  },
+  {
+    "isWeakness": false,
+    "name": "Arcane Studies",
+    "description": ""
+  },
+  {
+    "isWeakness": false,
+    "name": "Police",
+    "description": ""
+  },
+  {
+    "isWeakness": false,
+    "name": "Detective",
+    "description": ""
+  },
+	{
+    "isWeakness": false,
+    "name": "Agile",
+    "description": ""
+  },
+  {
+    "isWeakness": false,
+    "name": "Studious",
+    "description": ""
+  },
+  {
+    "isWeakness": false,
+    "name": "Quick-Witted",
+    "description": ""
+  },
+  {
+    "isWeakness": false,
+    "name": "Secret Rites",
+    "description": ""
+  },
+	{
+    "isWeakness": false,
+    "name": "Ancient Languages",
+    "description": ""
+  },
+  {
+    "isWeakness": true,
+    "name": "Haunted",
+    "description": ""
+  },
+  {
+    "isWeakness": true,
+    "name": "Claustrophobia",
+    "description": ""
+  },
+  {
+    "isWeakness": true,
+    "name": "Fear of Insects",
+    "description": ""
+  },
+	{
+    "isWeakness": true,
+    "name": "Cursed",
+    "description": ""
+  },
+  {
+    "isWeakness": true,
+    "name": "Criminal",
+    "description": ""
+  },
+  {
+    "isWeakness": true,
+    "name": "Paranoid",
+    "description": ""
+  }
+]
