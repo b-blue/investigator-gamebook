@@ -17,10 +17,17 @@ export interface Item {
   isEquipped: boolean;
 }
 
+export interface Ability {
+  name: string;
+  description: string;
+  isWeakness: boolean;
+}
+
 export interface GameState {
   characterName: string;
   diceRoll: number;
   attributes: Attributes;
+  abilities: string[]; // Array of ability names
   items: string[]; // Array of item names
   // Additional character sheet data will be added in future prompts
 }

@@ -232,7 +232,6 @@
 .attribute-input:hover {
   border-color: #444;
 }
-
 /* Items Section */
 .items-section {
   margin-bottom: 1.5rem;
@@ -271,7 +270,7 @@
   display: flex;
   align-items: center;
   gap: 1rem;
-  padding: 0.75rem 3rem 0.25rem 1rem;
+  padding: 0.75rem 3rem 0.75rem 1rem;
   transition: background-color 0.3s ease;
   position: relative;
   min-height: 3rem;
@@ -286,6 +285,8 @@
   font-size: 1rem;
   color: rgba(255, 255, 255, 0.87);
   flex: 1;
+  margin: 0;
+  padding: 0;
 }
 
 .collapsed-item.first-item {

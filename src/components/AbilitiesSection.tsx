@@ -1,56 +1,56 @@
 import { useState, useMemo } from 'react';
 import { Autocomplete, TextField } from '@mui/material';
-import type { Item } from '../types';
-import itemsData from '../data/items.json';
+import type { Ability } from '../types';
+import abilitiesData from '../data/abilities.json';
 
-interface ItemsSectionProps {
-  items: string[];
-  onItemsChange: (items: string[]) => void;
+interface AbilitiesSectionProps {
+  abilities: string[];
+  onAbilitiesChange: (abilities: string[]) => void;
 }
 
-export default function ItemsSection({ items, onItemsChange }: ItemsSectionProps) {
+export default function AbilitiesSection({ abilities, onAbilitiesChange }: AbilitiesSectionProps) {
   const [expanded, setExpanded] = useState(false);
   const [searchValue, setSearchValue] = useState('');
 
-  const availableItems: Item[] = itemsData as Item[];
+  const availableAbilities: Ability[] = abilitiesData as Ability[];
 
-  // Filter out already selected items from suggestions
-  const suggestionItems = useMemo(() => {
-    return availableItems.filter(item => !items.includes(item.name));
-  }, [items, availableItems]);
+  // Filter out already selected abilities from suggestions
+  const suggestionAbilities = useMemo(() => {
+    return availableAbilities.filter(ability => !abilities.includes(ability.name));
+  }, [abilities, availableAbilities]);
 
-  const handleAddItem = (itemName: string | null) => {
-    if (itemName && !items.includes(itemName)) {
-      onItemsChange([...items, itemName]);
+  const handleAddAbility = (abilityName: string | null) => {
+    if (abilityName && !abilities.includes(abilityName)) {
+      onAbilitiesChange([...abilities, abilityName]);
       setSearchValue('');
     }
   };
 
-  const handleRemoveItem = (itemName: string) => {
-    onItemsChange(items.filter(item => item !== itemName));
+  const handleRemoveAbility = (abilityName: string) => {
+    onAbilitiesChange(abilities.filter(ability => ability !== abilityName));
   };
 
   return (
-    <div className="items-section">
+    <div className="abilities-section">
       <div 
-        className={`items-collapsed-wrapper ${!expanded && items.length > 0 ? 'has-items' : ''}`}
+        className={`abilities-collapsed-wrapper ${!expanded && abilities.length > 0 ? 'has-abilities' : ''}`}
       >
         <div 
-          className="items-header"
+          className="abilities-header"
           onClick={() => setExpanded(!expanded)}
         >
           {expanded && (
-            <div className="items-title fade-in">Items</div>
+            <div className="abilities-title fade-in">Abilities</div>
           )}
-          {!expanded && items.length === 0 && (
-            <div className="items-title">Items</div>
+          {!expanded && abilities.length === 0 && (
+            <div className="abilities-title">Abilities</div>
           )}
-          {!expanded && items.length > 0 && (
-            <div className={`collapsed-item first-item ${items.length > 1 ? 'has-multiple' : ''}`}>
-              <div className="item-name">{items[0]}</div>
-              {availableItems.find(item => item.name === items[0])?.description && (
-                <div className="item-description">
-                  {availableItems.find(item => item.name === items[0])?.description}
+          {!expanded && abilities.length > 0 && (
+            <div className={`collapsed-ability first-ability ${abilities.length > 1 ? 'has-multiple' : ''}`}>
+              <div className="ability-name">{abilities[0]}</div>
+              {availableAbilities.find(ability => ability.name === abilities[0])?.description && (
+                <div className="ability-description">
+                  {availableAbilities.find(ability => ability.name === abilities[0])?.description}
                 </div>
               )}
             </div>
@@ -58,18 +58,18 @@ export default function ItemsSection({ items, onItemsChange }: ItemsSectionProps
           <span className={`expand-icon ${expanded ? 'expanded' : ''}`}>▶</span>
         </div>
 
-        {!expanded && items.length > 1 && (
+        {!expanded && abilities.length > 1 && (
           <div 
-            className="items-collapsed-list"
+            className="abilities-collapsed-list"
             onClick={() => setExpanded(!expanded)}
           >
-            {items.slice(1).map((itemName, index) => {
-              const itemData = availableItems.find(item => item.name === itemName);
+            {abilities.slice(1).map((abilityName, index) => {
+              const abilityData = availableAbilities.find(ability => ability.name === abilityName);
               return (
-                <div key={index + 1} className="collapsed-item">
-                  <div className="item-name">{itemName}</div>
-                  {itemData?.description && (
-                    <div className="item-description">{itemData.description}</div>
+                <div key={index + 1} className="collapsed-ability">
+                  <div className="ability-name">{abilityName}</div>
+                  {abilityData?.description && (
+                    <div className="ability-description">{abilityData.description}</div>
                   )}
                 </div>
               );
@@ -79,13 +79,13 @@ export default function ItemsSection({ items, onItemsChange }: ItemsSectionProps
       </div>
 
       {expanded && (
-        <div className="items-content">
+        <div className="abilities-content">
           <Autocomplete
-            options={suggestionItems.map(item => item.name)}
+            options={suggestionAbilities.map(ability => ability.name)}
             value={null}
             inputValue={searchValue}
             onInputChange={(_, newValue) => setSearchValue(newValue)}
-            onChange={(_, newValue) => handleAddItem(newValue)}
+            onChange={(_, newValue) => handleAddAbility(newValue)}
             filterOptions={(options, state) => {
               // Only show suggestions if user has typed 3 or more characters
               if (state.inputValue.length < 3) {
@@ -96,11 +96,11 @@ export default function ItemsSection({ items, onItemsChange }: ItemsSectionProps
               );
             }}
             open={searchValue.length >= 3}
-            noOptionsText="No matching items"
+            noOptionsText="No matching abilities"
             renderInput={(params) => (
               <TextField 
                 {...params} 
-                placeholder="Search for items..."
+                placeholder="Search for abilities..."
                 variant="outlined"
                 size="small"
                 sx={{
@@ -157,22 +157,22 @@ export default function ItemsSection({ items, onItemsChange }: ItemsSectionProps
             }}
           />
 
-          {items.length > 0 && (
-            <div className="items-list">
-              {items.map((itemName, index) => {
-                const itemData = availableItems.find(item => item.name === itemName);
+          {abilities.length > 0 && (
+            <div className="abilities-list">
+              {abilities.map((abilityName, index) => {
+                const abilityData = availableAbilities.find(ability => ability.name === abilityName);
                 return (
-                  <div key={index} className="item-card">
-                    <div className="item-info">
-                      <span className="item-name">{itemName}</span>
-                      {itemData?.description && (
-                        <span className="item-description">{itemData.description}</span>
+                  <div key={index} className="ability-card">
+                    <div className="ability-info">
+                      <span className="ability-name">{abilityName}</span>
+                      {abilityData?.description && (
+                        <span className="ability-description">{abilityData.description}</span>
                       )}
                     </div>
                     <button 
-                      className="item-remove-btn"
-                      onClick={() => handleRemoveItem(itemName)}
-                      aria-label={`Remove ${itemName}`}
+                      className="ability-remove-btn"
+                      onClick={() => handleRemoveAbility(abilityName)}
+                      aria-label={`Remove ${abilityName}`}
                     >
                       ✕
                     </button>

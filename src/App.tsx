@@ -6,6 +6,7 @@ import DiceRoller from './components/DiceRoller'
 import CharacterName from './components/CharacterName'
 import AttributesSection from './components/AttributesSection'
 import ItemsSection from './components/ItemsSection'
+import AbilitiesSection from './components/AbilitiesSection'
 
 const GAME_TITLES = {
   TDOA: 'The Darkness Over Arkham',
@@ -31,47 +32,10 @@ function App() {
     // Load from localStorage or initialize
     const saved = localStorage.getItem(STORAGE_KEY);
     const defaultState = {
-      TDOA: { characterName: '', diceRoll: 1, attributes: DEFAULT_ATTRIBUTES, items: [] },
-      TTOI: { characterName: '', diceRoll: 1, attributes: DEFAULT_ATTRIBUTES, items: [] }
+      TDOA: { characterName: '', diceRoll: 1, attributes: DEFAULT_ATTRIBUTES, abilities: [], items: [] },
+      TTOI: { characterName: '', diceRoll: 1, attributes: DEFAULT_ATTRIBUTES, abilities: [], items: [] }
     };
-    
-    if (saved) {
-      try {
-        const parsed = JSON.parse(saved);
-        
-        // Migration function to convert old agility to resources
-        const migrateAttributes = (attrs: any) => {
-          if (!attrs) return DEFAULT_ATTRIBUTES;
-          const migrated = { ...DEFAULT_ATTRIBUTES, ...attrs };
-          // If old agility exists and resources doesn't, migrate it
-          if ('agility' in attrs && !('resources' in attrs)) {
-            migrated.resources = attrs.agility;
-          }
-          // Remove agility if it exists
-          delete (migrated as any).agility;
-          return migrated;
-        };
-        
-        // Ensure all properties exist for backward compatibility
-        return {
-          TDOA: {
-            characterName: parsed.TDOA?.characterName || '',
-            diceRoll: parsed.TDOA?.diceRoll || 1,
-            attributes: migrateAttributes(parsed.TDOA?.attributes),
-            items: parsed.TDOA?.items || []
-          },
-          TTOI: {
-            characterName: parsed.TTOI?.characterName || '',
-            diceRoll: parsed.TTOI?.diceRoll || 1,
-            attributes: migrateAttributes(parsed.TTOI?.attributes),
-            items: parsed.TTOI?.items || []
-          }
-        };
-      } catch {
-        // Fall through to default state
-      }
-    }
-    return defaultState;
+    return saved ? JSON.parse(saved) : defaultState;
   });
 
   // Save to localStorage whenever gameState changes
@@ -113,6 +77,16 @@ function App() {
     }));
   };
 
+	  const updateAbilities = (abilities: string[]) => {
+    setGameState(prev => ({
+      ...prev,
+      [activeGame]: {
+        ...prev[activeGame],
+        abilities
+      }
+    }));
+  };
+
   const updateItems = (items: string[]) => {
     setGameState(prev => ({
       ...prev,
@@ -141,6 +115,11 @@ function App() {
         <AttributesSection
           attributes={gameState[activeGame].attributes}
           onAttributeChange={updateAttribute}
+        />
+
+				<AbilitiesSection
+          abilities={gameState[activeGame].abilities}
+          onAbilitiesChange={updateAbilities}
         />
 
         <ItemsSection
