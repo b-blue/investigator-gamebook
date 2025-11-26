@@ -33,29 +33,39 @@ export default function ItemsSection({ items, onItemsChange }: ItemsSectionProps
   return (
     <div className="items-section">
       <div 
-        className="items-header"
-        onClick={() => setExpanded(!expanded)}
+        className={`items-collapsed-wrapper ${!expanded && items.length > 0 ? 'has-items' : ''}`}
       >
-        {!expanded && items.length === 0 && (
-          <span className="items-title">Items</span>
-        )}
-        {!expanded && items.length > 0 && (
-          <div className="collapsed-item first-item">
-            {items[0]}
+        <div 
+          className="items-header"
+          onClick={() => setExpanded(!expanded)}
+        >
+          {expanded && (
+            <span className="items-title fade-in">Items</span>
+          )}
+          {!expanded && items.length === 0 && (
+            <span className="items-title">Items</span>
+          )}
+          {!expanded && items.length > 0 && (
+            <div className="collapsed-item first-item">
+              {items[0]}
+            </div>
+          )}
+          <span className={`expand-icon ${expanded ? 'expanded' : ''}`}>▶</span>
+        </div>
+
+        {!expanded && items.length > 1 && (
+          <div 
+            className="items-collapsed-list"
+            onClick={() => setExpanded(!expanded)}
+          >
+            {items.slice(1).map((item, index) => (
+              <div key={index + 1} className="collapsed-item">
+                {item}
+              </div>
+            ))}
           </div>
         )}
-        <span className="expand-icon">{expanded ? '▼' : '▶'}</span>
       </div>
-
-      {!expanded && items.length > 1 && (
-        <div className="items-collapsed-list">
-          {items.slice(1).map((item, index) => (
-            <div key={index + 1} className="collapsed-item">
-              {item}
-            </div>
-          ))}
-        </div>
-      )}
 
       {expanded && (
         <div className="items-content">

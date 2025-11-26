@@ -14,7 +14,10 @@ export default function AttributesSection({ attributes, onAttributeChange }: Att
       <div 
         className="attributes-header"
         onClick={() => setExpanded(!expanded)}
-      > 
+      >
+        {expanded && (
+          <div className="attributes-title fade-in">Attributes</div>
+        )}
         {!expanded && (
           <div className="attributes-summary">
             <span>W:{attributes.willpower}</span>
@@ -27,7 +30,7 @@ export default function AttributesSection({ attributes, onAttributeChange }: Att
             <span>D:{attributes.doom}</span>
           </div>
         )}
-        <span className="expand-icon">{expanded ? '▼' : '▶'}</span>
+        <span className={`expand-icon ${expanded ? 'expanded' : ''}`}>▶</span>
       </div>
 
       {expanded && (
