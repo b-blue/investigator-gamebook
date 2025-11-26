@@ -42,16 +42,17 @@ export interface CharacterState {
   abilities: string[]; // Array of ability names
   weaknesses: string[]; // Array of weakness names
   items: string[]; // Array of item names
+  secrets: string[]; // Array of secret names for this character's run
 }
 
 export interface GameState {
   currentCharacterName: string;
   characters: Record<string, CharacterState>; // Map of character name to their state
+  foundSecrets: string[]; // All secrets found across all runs in this campaign
 }
 
 export interface SharedState {
   diceRoll: number;
-  secrets: string[]; // Array of secret names - shared across both games
 }
 
 export interface AppState {

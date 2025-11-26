@@ -31,33 +31,35 @@ const DEFAULT_ATTRIBUTES = {
 function App() {
   const [activeGame, setActiveGame] = useState<GameType>('TDOA');
   const [finishRunModalOpen, setFinishRunModalOpen] = useState(false);
+  const [showSecretsView, setShowSecretsView] = useState(false);
   const [gameState, setGameState] = useState<AppState>(() => {
     // Load from localStorage or initialize
     const saved = localStorage.getItem(STORAGE_KEY);
     const defaultState: AppState = {
-      TDOA: { currentCharacterName: '', characters: {} },
-      TTOI: { currentCharacterName: '', characters: {} },
-      shared: { diceRoll: 1, secrets: [] }
+      TDOA: { currentCharacterName: '', characters: {}, foundSecrets: [] },
+      TTOI: { currentCharacterName: '', characters: {}, foundSecrets: [] },
+      shared: { diceRoll: 1 }
     };
     
     if (saved) {
       try {
         const parsed = JSON.parse(saved);
         
-        // Check if it's the new format
-        if (parsed.TDOA?.characters !== undefined) {
+        // Check if it's the new format with foundSecrets
+        if (parsed.TDOA?.foundSecrets !== undefined) {
           return {
             TDOA: {
               currentCharacterName: parsed.TDOA?.currentCharacterName || '',
-              characters: parsed.TDOA?.characters || {}
+              characters: parsed.TDOA?.characters || {},
+              foundSecrets: parsed.TDOA?.foundSecrets || []
             },
             TTOI: {
               currentCharacterName: parsed.TTOI?.currentCharacterName || '',
-              characters: parsed.TTOI?.characters || {}
+              characters: parsed.TTOI?.characters || {},
+              foundSecrets: parsed.TTOI?.foundSecrets || []
             },
             shared: {
-              diceRoll: parsed.shared?.diceRoll || 1,
-              secrets: parsed.shared?.secrets || []
+              diceRoll: parsed.shared?.diceRoll || 1
             }
           };
         }
@@ -71,12 +73,14 @@ function App() {
               attributes: oldGame?.attributes || DEFAULT_ATTRIBUTES,
               abilities: oldGame?.abilities || [],
               weaknesses: oldGame?.weaknesses || [],
-              items: oldGame?.items || []
+              items: oldGame?.items || [],
+              secrets: [] // Initialize empty secrets for migrated characters
             };
           }
           return {
             currentCharacterName: charName,
-            characters
+            characters,
+            foundSecrets: [] // Initialize empty foundSecrets
           };
         };
         
@@ -84,8 +88,7 @@ function App() {
           TDOA: migrateGame(parsed.TDOA),
           TTOI: migrateGame(parsed.TTOI),
           shared: {
-            diceRoll: parsed.shared?.diceRoll || parsed.TDOA?.diceRoll || 1,
-            secrets: parsed.shared?.secrets || parsed.TDOA?.secrets || []
+            diceRoll: parsed.shared?.diceRoll || parsed.TDOA?.diceRoll || 1
           }
         };
       } catch {
@@ -117,7 +120,7 @@ function App() {
     const charName = gameState[activeGame].currentCharacterName;
     return charName && gameState[activeGame].characters[charName]
       ? gameState[activeGame].characters[charName]
-      : { attributes: DEFAULT_ATTRIBUTES, abilities: [], weaknesses: [], items: [] };
+      : { attributes: DEFAULT_ATTRIBUTES, abilities: [], weaknesses: [], items: [], secrets: [] };
   };
 
   const handleCharacterSelect = (character: CharacterType, mode: 'restart' | 'load') => {
@@ -131,7 +134,8 @@ function App() {
           attributes: character.attributes,
           abilities: character.abilities,
           weaknesses: character.weaknesses,
-          items: character.items
+          items: character.items,
+          secrets: []
         };
       }
       // Load mode: character already exists in map, just switch to it
@@ -235,13 +239,24 @@ function App() {
   };
 
   const updateSecrets = (secrets: string[]) => {
-    setGameState(prev => ({
-      ...prev,
-      shared: {
-        ...prev.shared,
-        secrets
-      }
-    }));
+    setGameState(prev => {
+      const charName = prev[activeGame].currentCharacterName;
+      if (!charName) return prev;
+      
+      return {
+        ...prev,
+        [activeGame]: {
+          ...prev[activeGame],
+          characters: {
+            ...prev[activeGame].characters,
+            [charName]: {
+              ...prev[activeGame].characters[charName],
+              secrets
+            }
+          }
+        }
+      };
+    });
   };
 
   const handleFinishRun = () => {
@@ -256,14 +271,20 @@ function App() {
     if (!charName) return;
     
     setGameState(prev => {
+      const character = prev[activeGame].characters[charName];
       const newCharacters = { ...prev[activeGame].characters };
       delete newCharacters[charName];
+      
+      // Add character's secrets to foundSecrets
+      const currentFoundSecrets = prev[activeGame].foundSecrets;
+      const newFoundSecrets = [...new Set([...currentFoundSecrets, ...(character?.secrets || [])])];
       
       return {
         ...prev,
         [activeGame]: {
           currentCharacterName: '',
-          characters: newCharacters
+          characters: newCharacters,
+          foundSecrets: newFoundSecrets
         }
       };
     });
@@ -273,6 +294,16 @@ function App() {
 
   const cancelFinishRun = () => {
     setFinishRunModalOpen(false);
+  };
+
+  const clearFoundSecrets = () => {
+    setGameState(prev => ({
+      ...prev,
+      [activeGame]: {
+        ...prev[activeGame],
+        foundSecrets: []
+      }
+    }));
   };
 
   return (
@@ -316,17 +347,52 @@ function App() {
         />
 
         <SecretsSection
-          items={gameState.shared.secrets}
+          items={getCurrentCharacter().secrets}
           onItemsChange={updateSecrets}
           campaign={activeGame}
         />
         
         {gameState[activeGame].currentCharacterName && (
-          <button className="finish-run-button" onClick={handleFinishRun}>
-            Finish Run
-          </button>
+          <>
+            <button className="finish-run-button" onClick={handleFinishRun}>
+              Finish Run
+            </button>
+            <button className="secrets-view-button" onClick={() => setShowSecretsView(true)}>
+              ?
+            </button>
+          </>
         )}
       </div>
+
+      {showSecretsView && (
+        <div className="secrets-view-overlay" onClick={() => setShowSecretsView(false)}>
+          <div className="secrets-view-content" onClick={(e) => e.stopPropagation()}>
+            <button className="modal-close" onClick={() => setShowSecretsView(false)}>✕</button>
+            <h2 className="secrets-view-title">Secrets Found - {GAME_TITLES[activeGame]}</h2>
+            
+            {gameState[activeGame].foundSecrets.length === 0 ? (
+              <p className="secrets-view-empty">No secrets found yet. Complete runs to discover secrets!</p>
+            ) : (
+              <div className="secrets-view-list">
+                {gameState[activeGame].foundSecrets.map((secret, index) => (
+                  <div key={index} className="secret-item">{secret}</div>
+                ))}
+              </div>
+            )}
+            
+            <div className="secrets-view-actions">
+              {gameState[activeGame].foundSecrets.length > 0 && (
+                <button className="secrets-clear-button" onClick={clearFoundSecrets}>
+                  Clear All Secrets
+                </button>
+              )}
+              <button className="secrets-close-button" onClick={() => setShowSecretsView(false)}>
+                Close
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
 
       {finishRunModalOpen && (
         <div className="modal-overlay">
