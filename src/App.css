@@ -271,7 +271,7 @@
   display: flex;
   align-items: center;
   gap: 1rem;
-  padding: 0.75rem 3rem 0.75rem 1rem;
+  padding: 0.75rem 3rem 0.25rem 1rem;
   transition: background-color 0.3s ease;
   position: relative;
   min-height: 3rem;
@@ -294,8 +294,13 @@
   margin-right: 2.5rem;
 }
 
+.collapsed-item.first-item.has-multiple {
+  margin-bottom: -0.5rem;
+}
+
 .items-collapsed-list {
-  padding: 0.75rem 1rem 1rem;
+  padding: 0.5rem 1rem 1rem;
+  margin-top: -0.35rem;
   display: flex;
   flex-direction: column;
   gap: 0.5rem;

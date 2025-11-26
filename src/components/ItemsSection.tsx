@@ -46,7 +46,7 @@ export default function ItemsSection({ items, onItemsChange }: ItemsSectionProps
             <span className="items-title">Items</span>
           )}
           {!expanded && items.length > 0 && (
-            <div className="collapsed-item first-item">
+            <div className={`collapsed-item first-item ${items.length > 1 ? 'has-multiple' : ''}`}>
               <div className="item-name">{items[0]}</div>
               {availableItems.find(item => item.name === items[0])?.description && (
                 <div className="item-description">
