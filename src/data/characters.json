@@ -25,5 +25,227 @@
     "items": [
       "Heirloom of Hyperborea"
     ]
+  },
+
+  {
+    "name": "Rex Murphy",
+    "description": "The Reporter",
+    "attributes": {
+      "willpower": 3,
+      "intellect": 4,
+      "combat": 2,
+      "health": 6,
+      "sanity": 9,
+      "resources": 0,
+      "clues": 1,
+      "doom": 0
+    },
+    "abilities": [
+      "Reporter",
+      "Seeker"
+    ],
+    "weaknesses": [
+      "Rex's Curse",
+      "Cursed"
+    ],
+    "items": [
+      "Reporter's Notebook"
+    ]
+  },
+
+  {
+    "name": "Nathaniel Cho",
+    "description": "The Boxer",
+    "attributes": {
+      "willpower": 3,
+      "intellect": 2,
+      "combat": 5,
+      "health": 9,
+      "sanity": 6,
+      "resources": 0,
+      "clues": 0,
+      "doom": 0
+    },
+    "abilities": [
+      "Boxer",
+      "Guardian",
+      "Fighter",
+      "Tough"
+    ],
+    "weaknesses": [
+      "Hunted by the Mob",
+      "Criminal"
+    ],
+    "items": [
+      "Hidden Weapon"
+    ]
+  },
+
+  {
+    "name": "Stella Clark",
+    "description": "The Letter Carrier",
+    "attributes": {
+      "willpower": 3,
+      "intellect": 2,
+      "combat": 3,
+      "health": 8,
+      "sanity": 8,
+      "resources": 0,
+      "clues": 0,
+      "doom": 0
+    },
+    "abilities": [
+      "Nor Gloom of Night",
+      "Survivor",
+      "Tough",
+      "Civic"
+    ],
+    "weaknesses": [
+      "Called by the Mists",
+      "Haunted"
+    ],
+    "items": [
+      "Mailbag"
+    ]
+  },
+
+  {
+    "name": "Amanda Sharpe",
+    "description": "The Student",
+    "attributes": {
+      "willpower": 2,
+      "intellect": 2,
+      "combat": 2,
+      "health": 7,
+      "sanity": 7,
+      "resources": 0,
+      "clues": 2,
+      "doom": 0
+    },
+    "abilities": [
+      "Scholar",
+      "Seeker",
+      "Academic",
+      "Arcane Studies"
+    ],
+    "weaknesses": [
+      "Whispers of the Deep",
+      "Troubled",
+      "Dreams"
+    ],
+    "items": [
+      "Obscure Tome"
+    ]
+  },
+
+  {
+    "name": "Skids O'Toole",
+    "description": "The Ex-Con",
+    "attributes": {
+      "willpower": 2,
+      "intellect": 3,
+      "combat": 3,
+      "health": 8,
+      "sanity": 6,
+      "resources": 6,
+      "clues": 0,
+      "doom": 0
+    },
+    "abilities": [
+      "Ex-Con",
+      "Rogue"
+    ],
+    "weaknesses": [
+      "Hospital Debts",
+      "Criminal"
+    ],
+    "items": [
+      ".45 Automatic"
+    ]
+  }
+,
+  {
+    "name": "Silas Marsh",
+    "description": "The Sailor",
+    "attributes": {
+      "willpower": 2,
+      "intellect": 2,
+      "combat": 4,
+      "health": 9,
+      "sanity": 5,
+      "resources": 0,
+      "clues": 0,
+      "doom": 0
+    },
+    "abilities": [
+      "Drifter",
+      "Sailor",
+      "Tough",
+      "Survivor"
+    ],
+    "weaknesses": [
+      "Siren's Call",
+      "Tainted Lineage"
+    ],
+    "items": [
+      "Sailor's Net"
+    ]
+  },
+
+  {
+    "name": "Kohaku Narukami",
+    "description": "The Folklorist",
+    "attributes": {
+      "willpower": 4,
+      "intellect": 4,
+      "combat": 3,
+      "health": 6,
+      "sanity": 8,
+      "resources": 0,
+      "clues": 0,
+      "doom": 0
+    },
+    "abilities": [
+      "Blessed, Cursed",
+      "Mystic",
+      "Academic",
+      "Arcane Studies"
+    ],
+    "weaknesses": [
+      "Weeping Yurei",
+      "Cursed",
+      "Haunted"
+    ],
+    "items": [
+      "The Book of Living Myths"
+    ]
+  },
+
+  {
+    "name": "Marion Tavares",
+    "description": "The Trawler",
+    "attributes": {
+      "willpower": 2,
+      "intellect": 3,
+      "combat": 4,
+      "health": 8,
+      "sanity": 6,
+      "resources": 0,
+      "clues": 0,
+      "doom": 0
+    },
+    "abilities": [
+      "Determined",
+      "Guardian",
+      "Fighter",
+      "Tough"
+    ],
+    "weaknesses": [
+      "I'll Do It Myself",
+      "Criminal"
+    ],
+    "items": [
+      "Strong Rope"
+    ]
   }
 ]

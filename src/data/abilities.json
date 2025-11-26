@@ -61,6 +61,36 @@
   },
   {
     "isWeakness": false,
+    "name": "Drifter",
+    "description": "Whenever you spend a resource as part of a test, if the test is successful, gain 1 resource."
+  },
+  {
+    "isWeakness": true,
+    "name": "Sirens' Call",
+    "description": "Each time you gain doom, spend a resource. Otherwise, gain 1 additional doom."
+  },
+  {
+    "isWeakness": false,
+    "name": "Blessed, Cursed",
+    "description": "For willpower tests, you may roll 2 dice instead of 1, and select the die of your choosing. However, if the dice roll results in a double, you automatically fail and gain 1 doom."
+  },
+  {
+    "isWeakness": true,
+    "name": "Weeping Yurei",
+    "description": "When you fail a willpower test, roll a die and add your combat. If the total sum is equal to or greater than the current doom, lose 1 health."
+  },
+  {
+    "isWeakness": false,
+    "name": "Determined",
+    "description": "When using combat, if you win a round, add an additional +1 combat to the next round."
+  },
+  {
+    "isWeakness": true,
+    "name": "I'll Do It Myself",
+    "description": "Each time you lose sanity or health, roll a die. If the score is below your current sanity or health (as appropriate), gain +1 doom. If you lose sanity and health at the same time, choose one to apply the effect (your choice)."
+  },
+  {
+    "isWeakness": false,
     "name": "Mystic",
     "description": ""
   },
@@ -84,7 +114,7 @@
     "name": "Detective",
     "description": ""
   },
-	{
+  {
     "isWeakness": false,
     "name": "Agile",
     "description": ""
@@ -104,7 +134,7 @@
     "name": "Secret Rites",
     "description": ""
   },
-	{
+  {
     "isWeakness": false,
     "name": "Ancient Languages",
     "description": ""
@@ -124,7 +154,7 @@
     "name": "Fear of Insects",
     "description": ""
   },
-	{
+  {
     "isWeakness": true,
     "name": "Cursed",
     "description": ""

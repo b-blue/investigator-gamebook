@@ -1,20 +1,39 @@
-# Notes
 
-We are now going to implement a "Character" system. This feature will allow a user to select a character name from a dropdown; selecting a certain character will configure the attributes to certain values, as well as the list of abilities and items. A character can start with any ability or item from the existing list of items or abilities, and any value for any attribute. 
+---
 
-The end result of this system will replace the current CharacterName component with a similarly-style dropdown from which a character can be selected. 
-
-To begin, we need to consider the structure of this data. Create a new "characters.json" file in the data folder and create a data structure for the example character below: 
-
-Name: Agnes Baker
-Description: The Waitress
-Willpower: 5
+Name: Silas Marsh
+Description: The Sailor
+Willpower: 2
 Intellect: 2
-Combat: 2
+Combat: 4
+Health: 9
+Sanity: 5
+Starting Abilities, in order: Drifter, Sailor, Tough, Survivor
+Starting Weaknesses, in order: Siren's Call, Tainted Lineage
+Starting Items, in order: Sailor's Net
+
+---
+
+Name: Kohaku Narukami
+Description: The Folklorist
+Willpower: 4
+Intellect: 4
+Combat: 3
 Health: 6
 Sanity: 8
-Starting Abilties, in order: Sorcerer, Mystic, Sorcery, Arcane Studies
-Starting Weaknesses, in order: Dark Memories, Haunted
-Starting Items, in order: Heirloom of Hyperborea
+Starting Abilities, in order: "Blessed, Cursed", Mystic, Academic, Arcane Studies
+Starting Weaknesses, in order: Weeing Yurei, Cursed, Haunted
+Starting Items, in order: The Book of Living Myths
 
-Some of the abilities, weaknesses and items that a character starts with will apply certain rules to the game which also need to be tracked, but we will address that later. Currently we need to focus on the data structure we can use to populate the characters.json file. 
+---
+
+Name: Marion Tavares
+Description: The Trawler
+Willpower: 2
+Intellect: 3
+Combat: 4
+Health: 8
+Sanity: 6
+Starting Abilities, in order: Determined, Guardian, Fighter, Tough
+Starting Weaknesses, in order: I'll Do It Myself, Criminal
+Starting Items, in order: Strong Rope
