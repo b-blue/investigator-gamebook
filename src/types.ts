@@ -23,12 +23,19 @@ export interface Ability {
   isWeakness: boolean;
 }
 
+export interface Secret {
+  name: string;
+  description: string;
+  isChecked: boolean;
+}
+
 export interface GameState {
   characterName: string;
   diceRoll: number;
   attributes: Attributes;
   abilities: string[]; // Array of ability names
   items: string[]; // Array of item names
+  secrets: string[]; // Array of secret names
   // Additional character sheet data will be added in future prompts
 }
 

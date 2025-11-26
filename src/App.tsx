@@ -7,6 +7,7 @@ import CharacterName from './components/CharacterName'
 import AttributesSection from './components/AttributesSection'
 import ItemsSection from './components/ItemsSection'
 import AbilitiesSection from './components/AbilitiesSection'
+import SecretsSection from './components/SecretsSection'
 
 const GAME_TITLES = {
   TDOA: 'The Darkness Over Arkham',
@@ -32,10 +33,38 @@ function App() {
     // Load from localStorage or initialize
     const saved = localStorage.getItem(STORAGE_KEY);
     const defaultState = {
-      TDOA: { characterName: '', diceRoll: 1, attributes: DEFAULT_ATTRIBUTES, abilities: [], items: [] },
-      TTOI: { characterName: '', diceRoll: 1, attributes: DEFAULT_ATTRIBUTES, abilities: [], items: [] }
+      TDOA: { characterName: '', diceRoll: 1, attributes: DEFAULT_ATTRIBUTES, abilities: [], items: [], secrets: [] },
+      TTOI: { characterName: '', diceRoll: 1, attributes: DEFAULT_ATTRIBUTES, abilities: [], items: [], secrets: [] }
     };
-    return saved ? JSON.parse(saved) : defaultState;
+    
+    if (saved) {
+      try {
+        const parsed = JSON.parse(saved);
+        // Ensure all properties exist for backward compatibility
+        return {
+          TDOA: {
+            characterName: parsed.TDOA?.characterName || '',
+            diceRoll: parsed.TDOA?.diceRoll || 1,
+            attributes: parsed.TDOA?.attributes || DEFAULT_ATTRIBUTES,
+            abilities: parsed.TDOA?.abilities || [],
+            items: parsed.TDOA?.items || [],
+            secrets: parsed.TDOA?.secrets || []
+          },
+          TTOI: {
+            characterName: parsed.TTOI?.characterName || '',
+            diceRoll: parsed.TTOI?.diceRoll || 1,
+            attributes: parsed.TTOI?.attributes || DEFAULT_ATTRIBUTES,
+            abilities: parsed.TTOI?.abilities || [],
+            items: parsed.TTOI?.items || [],
+            secrets: parsed.TTOI?.secrets || []
+          }
+        };
+      } catch {
+        return defaultState;
+      }
+    }
+    
+    return defaultState;
   });
 
   // Save to localStorage whenever gameState changes
@@ -77,7 +106,17 @@ function App() {
     }));
   };
 
-	  const updateAbilities = (abilities: string[]) => {
+  const updateItems = (items: string[]) => {
+    setGameState(prev => ({
+      ...prev,
+      [activeGame]: {
+        ...prev[activeGame],
+        items
+      }
+    }));
+  };
+
+  const updateAbilities = (abilities: string[]) => {
     setGameState(prev => ({
       ...prev,
       [activeGame]: {
@@ -87,12 +126,12 @@ function App() {
     }));
   };
 
-  const updateItems = (items: string[]) => {
+  const updateSecrets = (secrets: string[]) => {
     setGameState(prev => ({
       ...prev,
       [activeGame]: {
         ...prev[activeGame],
-        items
+        secrets
       }
     }));
   };
@@ -117,14 +156,19 @@ function App() {
           onAttributeChange={updateAttribute}
         />
 
-				<AbilitiesSection
-          abilities={gameState[activeGame].abilities}
-          onAbilitiesChange={updateAbilities}
+        <AbilitiesSection
+          items={gameState[activeGame].abilities}
+          onItemsChange={updateAbilities}
         />
 
         <ItemsSection
           items={gameState[activeGame].items}
           onItemsChange={updateItems}
+        />
+
+        <SecretsSection
+          items={gameState[activeGame].secrets}
+          onItemsChange={updateSecrets}
         />
       </div>
     </div>

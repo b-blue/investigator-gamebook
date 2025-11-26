@@ -293,6 +293,7 @@
   flex: 1;
   margin: 0;
   margin-right: 2.5rem;
+  padding: 0.5rem;
 }
 
 .collapsed-item.first-item.has-multiple {
@@ -717,10 +718,6 @@
 
   .items-title {
     color: rgba(0, 0, 0, 0.87);
-  }
-
-  .items-collapsed-list {
-    /* No changes needed for padding/gap */
   }
 
   .collapsed-item {

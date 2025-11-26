@@ -1,23 +1,23 @@
 import { useState, useMemo } from 'react';
 import { Autocomplete, TextField } from '@mui/material';
-import type { Ability } from '../types';
-import abilitiesData from '../data/abilities.json';
+import type { Secret } from '../types';
+import secretsData from '../data/secrets.json';
 
 interface ItemsSectionProps {
   items: string[];
   onItemsChange: (items: string[]) => void;
 }
 
-export default function AbilitiesSection({ items, onItemsChange }: ItemsSectionProps) {
+export default function SecretsSection({ items, onItemsChange }: ItemsSectionProps) {
   const [expanded, setExpanded] = useState(false);
   const [searchValue, setSearchValue] = useState('');
 
-  const availableAbilities: Ability[] = abilitiesData as Ability[];
+  const availableSecrets: Secret[] = secretsData as Secret[];
 
   // Filter out already selected items from suggestions
   const suggestionItems = useMemo(() => {
-    return availableAbilities.filter(ability => !items.includes(ability.name));
-  }, [items, availableAbilities]);
+    return availableSecrets.filter(secret => !items.includes(secret.name));
+  }, [items, availableSecrets]);
 
   const handleAddItem = (itemName: string | null) => {
     if (itemName && !items.includes(itemName)) {
@@ -40,17 +40,17 @@ export default function AbilitiesSection({ items, onItemsChange }: ItemsSectionP
           onClick={() => setExpanded(!expanded)}
         >
           {expanded && (
-            <div className="items-title fade-in">Abilities</div>
+            <div className="items-title fade-in">Secrets</div>
           )}
           {!expanded && items.length === 0 && (
-            <div className="items-title">Abilities</div>
+            <div className="items-title">Secrets</div>
           )}
           {!expanded && items.length > 0 && (
             <div className={`collapsed-item first-item ${items.length > 1 ? 'has-multiple' : ''}`}>
               <div className="item-name">{items[0]}</div>
-              {availableAbilities.find(ability => ability.name === items[0])?.description && (
+              {availableSecrets.find(secret => secret.name === items[0])?.description && (
                 <div className="item-description">
-                  {availableAbilities.find(ability => ability.name === items[0])?.description}
+                  {availableSecrets.find(secret => secret.name === items[0])?.description}
                 </div>
               )}
             </div>
@@ -64,7 +64,7 @@ export default function AbilitiesSection({ items, onItemsChange }: ItemsSectionP
             onClick={() => setExpanded(!expanded)}
           >
             {items.slice(1).map((itemName, index) => {
-              const itemData = availableAbilities.find(ability => ability.name === itemName);
+              const itemData = availableSecrets.find(secret => secret.name === itemName);
               return (
                 <div key={index + 1} className="collapsed-item">
                   <div className="item-name">{itemName}</div>
@@ -96,11 +96,11 @@ export default function AbilitiesSection({ items, onItemsChange }: ItemsSectionP
               );
             }}
             open={searchValue.length >= 3}
-            noOptionsText="No matching abilities"
+            noOptionsText="No matching secrets"
             renderInput={(params) => (
               <TextField 
                 {...params} 
-                placeholder="Search for abilities..."
+                placeholder="Search for secrets..."
                 variant="outlined"
                 size="small"
                 sx={{
@@ -160,7 +160,7 @@ export default function AbilitiesSection({ items, onItemsChange }: ItemsSectionP
           {items.length > 0 && (
             <div className="items-list">
               {items.map((itemName, index) => {
-                const itemData = availableAbilities.find(ability => ability.name === itemName);
+                const itemData = availableSecrets.find(secret => secret.name === itemName);
                 return (
                   <div key={index} className="item-card">
                     <div className="item-info">
