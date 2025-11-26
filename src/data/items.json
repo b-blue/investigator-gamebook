@@ -149,4 +149,127 @@
     "name": "Flick Knife",
     "description": ""
   }
+
+,
+  {
+    "isEquipped": false,
+    "name": "Cudgel",
+    "description": ""
+  },
+  {
+    "isEquipped": false,
+    "name": "Rope",
+    "description": ""
+  },
+  {
+    "isEquipped": false,
+    "name": "Sea Gold",
+    "description": ""
+  },
+  {
+    "isEquipped": false,
+    "name": "Carved Idol",
+    "description": ""
+  },
+  {
+    "isEquipped": false,
+    "name": "Crowbar",
+    "description": ""
+  },
+  {
+    "isEquipped": false,
+    "name": "Greenstone Statue",
+    "description": ""
+  },
+  {
+    "isEquipped": false,
+    "name": "Map of the Tunnels",
+    "description": ""
+  },
+  {
+    "isEquipped": false,
+    "name": "Harpoon",
+    "description": ""
+  },
+  {
+    "isEquipped": false,
+    "name": "Octopus Crown",
+    "description": ""
+  },
+  {
+    "isEquipped": false,
+    "name": "Screwdriver",
+    "description": ""
+  },
+  {
+    "isEquipped": false,
+    "name": "Wooden Mallet",
+    "description": ""
+  },
+  {
+    "isEquipped": false,
+    "name": "Treasure Hunter's Chart",
+    "description": ""
+  },
+  {
+    "isEquipped": false,
+    "name": "Dr Addison's Diary",
+    "description": ""
+  },
+  {
+    "isEquipped": false,
+    "name": "Innsmouth Tribune",
+    "description": ""
+  },
+  {
+    "isEquipped": false,
+    "name": "Book of Tide Times",
+    "description": ""
+  },
+  {
+    "isEquipped": false,
+    "name": "Logbook",
+    "description": ""
+  },
+  {
+    "isEquipped": false,
+    "name": "Oil Lantern",
+    "description": ""
+  },
+  {
+    "isEquipped": false,
+    "name": "Ship's Compass",
+    "description": ""
+  },
+  {
+    "isEquipped": false,
+    "name": "Hammer",
+    "description": ""
+  },
+  {
+    "isEquipped": false,
+    "name": "Spade",
+    "description": ""
+  },
+  {
+    "isEquipped": false,
+    "name": "Moonshine",
+    "description": ""
+  },
+  {
+    "isEquipped": false,
+    "name": "Umbrella",
+    "description": ""
+  },
+  {
+    "isEquipped": false,
+    "name": "Lantern",
+    "description": ""
+  },
+  {
+    "isEquipped": false,
+    "name": "Flashlight",
+    "description": ""
+  }
 ]
+

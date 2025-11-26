@@ -1,3 +1,5 @@
+import { Button } from '@mui/material';
+
 interface DiceRollerProps {
   value: number;
   onRoll: () => void;
@@ -5,8 +7,8 @@ interface DiceRollerProps {
 
 export default function DiceRoller({ value, onRoll }: DiceRollerProps) {
   return (
-    <button className="dice-button" onClick={onRoll}>
+    <Button className="dice-button" onClick={onRoll}>
       {value}
-    </button>
+    </Button>
   );
 }

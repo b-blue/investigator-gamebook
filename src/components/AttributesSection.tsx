@@ -255,11 +255,13 @@ export default function AttributesSection({
               <button className="modal-btn increment-btn" onClick={increment}>+</button>
             </div>
 
-            <div className="modal-dice">
-              <button className="dice-button" onClick={handleAttributeRoll}>
-                {diceValue}
-              </button>
-            </div>
+            {(selectedAttribute === 'willpower' || selectedAttribute === 'intellect' || selectedAttribute === 'combat') && (
+              <div className="modal-dice">
+                <button className="dice-button" onClick={handleAttributeRoll}>
+                  {diceValue}
+                </button>
+              </div>
+            )}
 
             {(relatedItems.abilities.length > 0 || relatedItems.weaknesses.length > 0 || relatedItems.items.length > 0) && (
               <div className="modal-related-items">

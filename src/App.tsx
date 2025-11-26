@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react'
 import './App.css'
+import { ButtonGroup, Button } from '@mui/material'
 import type { GameType, AppState, Character as CharacterType } from './types'
 import GameTabs from './components/GameTabs'
 import DiceRoller from './components/DiceRoller'
@@ -32,12 +33,14 @@ function App() {
   const [activeGame, setActiveGame] = useState<GameType>('TDOA');
   const [finishRunModalOpen, setFinishRunModalOpen] = useState(false);
   const [showSecretsView, setShowSecretsView] = useState(false);
+  const [bookmarkModalOpen, setBookmarkModalOpen] = useState(false);
+  const [bookmarkInput, setBookmarkInput] = useState('');
   const [gameState, setGameState] = useState<AppState>(() => {
     // Load from localStorage or initialize
     const saved = localStorage.getItem(STORAGE_KEY);
     const defaultState: AppState = {
-      TDOA: { currentCharacterName: '', characters: {}, foundSecrets: [] },
-      TTOI: { currentCharacterName: '', characters: {}, foundSecrets: [] },
+      TDOA: { currentCharacterName: '', characters: {}, foundSecrets: [], bookmark: 0 },
+      TTOI: { currentCharacterName: '', characters: {}, foundSecrets: [], bookmark: 0 },
       shared: { diceRoll: 1 }
     };
     
@@ -51,12 +54,14 @@ function App() {
             TDOA: {
               currentCharacterName: parsed.TDOA?.currentCharacterName || '',
               characters: parsed.TDOA?.characters || {},
-              foundSecrets: parsed.TDOA?.foundSecrets || []
+              foundSecrets: parsed.TDOA?.foundSecrets || [],
+              bookmark: parsed.TDOA?.bookmark || 0
             },
             TTOI: {
               currentCharacterName: parsed.TTOI?.currentCharacterName || '',
               characters: parsed.TTOI?.characters || {},
-              foundSecrets: parsed.TTOI?.foundSecrets || []
+              foundSecrets: parsed.TTOI?.foundSecrets || [],
+              bookmark: parsed.TTOI?.bookmark || 0
             },
             shared: {
               diceRoll: parsed.shared?.diceRoll || 1
@@ -80,7 +85,8 @@ function App() {
           return {
             currentCharacterName: charName,
             characters,
-            foundSecrets: [] // Initialize empty foundSecrets
+            foundSecrets: [], // Initialize empty foundSecrets
+            bookmark: 0 // Initialize bookmark
           };
         };
         
@@ -306,13 +312,41 @@ function App() {
     }));
   };
 
+  const openBookmarkModal = () => {
+    setBookmarkInput(gameState[activeGame].bookmark > 0 ? gameState[activeGame].bookmark.toString() : '');
+    setBookmarkModalOpen(true);
+  };
+
+  const saveBookmark = () => {
+    const value = parseInt(bookmarkInput, 10);
+    if (!isNaN(value) && value >= 0) {
+      setGameState(prev => ({
+        ...prev,
+        [activeGame]: {
+          ...prev[activeGame],
+          bookmark: value
+        }
+      }));
+    }
+    setBookmarkModalOpen(false);
+  };
+
+  const cancelBookmark = () => {
+    setBookmarkModalOpen(false);
+  };
+
   return (
     <div className="app-container">
       <GameTabs activeGame={activeGame} onGameChange={setActiveGame} />
 
       <div className="header">
         <h1 className="title">{GAME_TITLES[activeGame]}</h1>
-        <DiceRoller value={gameState.shared.diceRoll} onRoll={rollDice} />
+        <ButtonGroup variant="contained" className="button-group">
+          <Button className="bookmark-button" onClick={openBookmarkModal} title="Save Your Place">
+            🔖
+          </Button>
+          <DiceRoller value={gameState.shared.diceRoll} onRoll={rollDice} />
+        </ButtonGroup>
       </div>
 
       <div className="content">
@@ -391,6 +425,27 @@ function App() {
               <button className="secrets-close-button" onClick={() => setShowSecretsView(false)}>
                 Close
               </button>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {bookmarkModalOpen && (
+        <div className="modal-overlay">
+          <div className="modal-content">
+            <h3 className="modal-title">Save Your Place</h3>
+            <input
+              type="number"
+              className="bookmark-input"
+              value={bookmarkInput}
+              onChange={(e) => setBookmarkInput(e.target.value)}
+              placeholder="Enter page number"
+              min="0"
+              autoFocus
+            />
+            <div className="modal-controls">
+              <button className="modal-btn decrement-btn" onClick={cancelBookmark}>Cancel</button>
+              <button className="modal-btn increment-btn" onClick={saveBookmark}>Save</button>
             </div>
           </div>
         </div>

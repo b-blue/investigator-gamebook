@@ -169,4 +169,61 @@
     "name": "Paranoid",
     "description": ""
   }
+,
+  {
+    "isWeakness": false,
+    "name": "Sailor",
+    "description": ""
+  },
+  {
+    "isWeakness": false,
+    "name": "Tough",
+    "description": ""
+  },
+  {
+    "isWeakness": false,
+    "name": "Survivor",
+    "description": ""
+  },
+  {
+    "isWeakness": false,
+    "name": "Academic",
+    "description": ""
+  },
+  {
+    "isWeakness": false,
+    "name": "Guardian",
+    "description": ""
+  },
+  {
+    "isWeakness": false,
+    "name": "Fighter",
+    "description": ""
+  },
+  {
+    "isWeakness": false,
+    "name": "Climber",
+    "description": ""
+  },
+  {
+    "isWeakness": true,
+    "name": "Tainted Lineage",
+    "description": ""
+  },
+  {
+    "isWeakness": true,
+    "name": "Troubled Dreams",
+    "description": ""
+  },
+  {
+    "isWeakness": true,
+    "name": "Watched",
+    "description": ""
+  },
+  {
+    "isWeakness": true,
+    "name": "Fear of Heights",
+    "description": ""
+  }
 ]
+
