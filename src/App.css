@@ -65,6 +65,32 @@
   overflow-y: auto;
 }
 
+/* Finish Run Button */
+.finish-run-button {
+  width: 100%;
+  padding: 1rem;
+  margin-top: 2rem;
+  font-size: 1.1rem;
+  font-weight: 600;
+  border-radius: 8px;
+  border: 2px solid #dc2626;
+  background-color: #7f1d1d;
+  color: rgba(255, 255, 255, 0.87);
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.finish-run-button:hover {
+  background-color: #991b1b;
+  border-color: #ef4444;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(220, 38, 38, 0.3);
+}
+
+.finish-run-button:active {
+  transform: translateY(0);
+}
+
 /* Character Section */
 .character-section {
   margin-bottom: 1.5rem;

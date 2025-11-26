@@ -25,8 +25,7 @@ export interface Ability {
 
 export interface Secret {
   name: string;
-  description: string;
-  isChecked: boolean;
+  campaign: 'TDOA' | 'TTOI';
 }
 
 export interface Character {

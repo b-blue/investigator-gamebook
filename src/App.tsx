@@ -30,6 +30,7 @@ const DEFAULT_ATTRIBUTES = {
 
 function App() {
   const [activeGame, setActiveGame] = useState<GameType>('TDOA');
+  const [finishRunModalOpen, setFinishRunModalOpen] = useState(false);
   const [gameState, setGameState] = useState<AppState>(() => {
     // Load from localStorage or initialize
     const saved = localStorage.getItem(STORAGE_KEY);
@@ -243,6 +244,37 @@ function App() {
     }));
   };
 
+  const handleFinishRun = () => {
+    const charName = gameState[activeGame].currentCharacterName;
+    if (!charName) return;
+    
+    setFinishRunModalOpen(true);
+  };
+
+  const confirmFinishRun = () => {
+    const charName = gameState[activeGame].currentCharacterName;
+    if (!charName) return;
+    
+    setGameState(prev => {
+      const newCharacters = { ...prev[activeGame].characters };
+      delete newCharacters[charName];
+      
+      return {
+        ...prev,
+        [activeGame]: {
+          currentCharacterName: '',
+          characters: newCharacters
+        }
+      };
+    });
+    
+    setFinishRunModalOpen(false);
+  };
+
+  const cancelFinishRun = () => {
+    setFinishRunModalOpen(false);
+  };
+
   return (
     <div className="app-container">
       <GameTabs activeGame={activeGame} onGameChange={setActiveGame} />
@@ -286,8 +318,32 @@ function App() {
         <SecretsSection
           items={gameState.shared.secrets}
           onItemsChange={updateSecrets}
+          campaign={activeGame}
         />
+        
+        {gameState[activeGame].currentCharacterName && (
+          <button className="finish-run-button" onClick={handleFinishRun}>
+            Finish Run
+          </button>
+        )}
       </div>
+
+      {finishRunModalOpen && (
+        <div className="modal-overlay">
+          <div className="modal-content">
+            <p className="modal-message">
+              Are you sure you want to finish your run?
+              <br />
+              <br />
+              All saved data for <strong>{gameState[activeGame].currentCharacterName}</strong> in {GAME_TITLES[activeGame]} will be cleared.
+            </p>
+            <div className="modal-controls">
+              <button className="modal-btn decrement-btn" onClick={cancelFinishRun}>Cancel</button>
+              <button className="modal-btn increment-btn" onClick={confirmFinishRun}>Finish Run</button>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   )
 }

@@ -1,23 +1,29 @@
 import { useState, useMemo } from 'react';
 import { Autocomplete, TextField } from '@mui/material';
-import type { Secret } from '../types';
+import type { Secret, GameType } from '../types';
 import secretsData from '../data/secrets.json';
 
 interface ItemsSectionProps {
   items: string[];
   onItemsChange: (items: string[]) => void;
+  campaign: GameType;
 }
 
-export default function SecretsSection({ items, onItemsChange }: ItemsSectionProps) {
+export default function SecretsSection({ items, onItemsChange, campaign }: ItemsSectionProps) {
   const [expanded, setExpanded] = useState(false);
   const [searchValue, setSearchValue] = useState('');
 
   const availableSecrets: Secret[] = secretsData as Secret[];
 
+  // Filter secrets by campaign
+  const campaignSecrets = useMemo(() => {
+    return availableSecrets.filter(secret => secret.campaign === campaign);
+  }, [availableSecrets, campaign]);
+
   // Filter out already selected items from suggestions
   const suggestionItems = useMemo(() => {
-    return availableSecrets.filter(secret => !items.includes(secret.name));
-  }, [items, availableSecrets]);
+    return campaignSecrets.filter(secret => !items.includes(secret.name));
+  }, [items, campaignSecrets]);
 
   const handleAddItem = (itemName: string | null) => {
     if (itemName && !items.includes(itemName)) {
@@ -48,11 +54,6 @@ export default function SecretsSection({ items, onItemsChange }: ItemsSectionPro
           {!expanded && items.length > 0 && (
             <div className={`collapsed-item first-item ${items.length > 1 ? 'has-multiple' : ''}`}>
               <div className="item-name">{items[0]}</div>
-              {availableSecrets.find(secret => secret.name === items[0])?.description && (
-                <div className="item-description">
-                  {availableSecrets.find(secret => secret.name === items[0])?.description}
-                </div>
-              )}
             </div>
           )}
           <span className={`expand-icon ${expanded ? 'expanded' : ''}`}>▶</span>
@@ -63,17 +64,11 @@ export default function SecretsSection({ items, onItemsChange }: ItemsSectionPro
             className="items-collapsed-list"
             onClick={() => setExpanded(!expanded)}
           >
-            {items.slice(1).map((itemName, index) => {
-              const itemData = availableSecrets.find(secret => secret.name === itemName);
-              return (
-                <div key={index + 1} className="collapsed-item">
-                  <div className="item-name">{itemName}</div>
-                  {itemData?.description && (
-                    <div className="item-description">{itemData.description}</div>
-                  )}
-                </div>
-              );
-            })}
+            {items.slice(1).map((itemName, index) => (
+              <div key={index + 1} className="collapsed-item">
+                <div className="item-name">{itemName}</div>
+              </div>
+            ))}
           </div>
         )}
       </div>
@@ -159,26 +154,20 @@ export default function SecretsSection({ items, onItemsChange }: ItemsSectionPro
 
           {items.length > 0 && (
             <div className="items-list">
-              {items.map((itemName, index) => {
-                const itemData = availableSecrets.find(secret => secret.name === itemName);
-                return (
-                  <div key={index} className="item-card">
-                    <div className="item-info">
-                      <span className="item-name">{itemName}</span>
-                      {itemData?.description && (
-                        <span className="item-description">{itemData.description}</span>
-                      )}
-                    </div>
-                    <button 
-                      className="item-remove-btn"
-                      onClick={() => handleRemoveItem(itemName)}
-                      aria-label={`Remove ${itemName}`}
-                    >
-                      ✕
-                    </button>
+              {items.map((itemName, index) => (
+                <div key={index} className="item-card">
+                  <div className="item-info">
+                    <span className="item-name">{itemName}</span>
                   </div>
-                );
-              })}
+                  <button 
+                    className="item-remove-btn"
+                    onClick={() => handleRemoveItem(itemName)}
+                    aria-label={`Remove ${itemName}`}
+                  >
+                    ✕
+                  </button>
+                </div>
+              ))}
             </div>
           )}
         </div>
