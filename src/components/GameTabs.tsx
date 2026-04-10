@@ -31,6 +31,7 @@ export default function GameTabs({ activeGame, onGameChange }: GameTabsProps) {
       >
         <Tab label="TDOA" value="TDOA" />
         <Tab label="TTOI" value="TTOI" />
+        <Tab label="TKM" value="TKM" />
       </Tabs>
     </Box>
   );

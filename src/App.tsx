@@ -13,7 +13,8 @@ import SecretsSection from './components/SecretsSection'
 
 const GAME_TITLES = {
   TDOA: 'The Darkness Over Arkham',
-  TTOI: 'The Tides of Innsmouth'
+  TTOI: 'The Tides of Innsmouth',
+  TKM: 'The Kingsport Metamorphosis'
 };
 
 const STORAGE_KEY = 'arkham-gamebook-state';
@@ -43,6 +44,7 @@ function App() {
     const defaultState: AppState = {
       TDOA: { currentCharacterName: '', characters: {}, foundSecrets: [], bookmark: 0, completedRuns: [] },
       TTOI: { currentCharacterName: '', characters: {}, foundSecrets: [], bookmark: 0, completedRuns: [] },
+      TKM: { currentCharacterName: '', characters: {}, foundSecrets: [], bookmark: 0, completedRuns: [] },
       shared: { diceRoll: 1 }
     };
     
@@ -66,6 +68,13 @@ function App() {
               foundSecrets: parsed.TTOI?.foundSecrets || [],
               bookmark: parsed.TTOI?.bookmark || 0,
               completedRuns: parsed.TTOI?.completedRuns || []
+            },
+            TKM: {
+              currentCharacterName: parsed.TKM?.currentCharacterName || '',
+              characters: parsed.TKM?.characters || {},
+              foundSecrets: parsed.TKM?.foundSecrets || [],
+              bookmark: parsed.TKM?.bookmark || 0,
+              completedRuns: parsed.TKM?.completedRuns || []
             },
             shared: {
               diceRoll: parsed.shared?.diceRoll || 1
@@ -98,6 +107,7 @@ function App() {
         return {
           TDOA: migrateGame(parsed.TDOA),
           TTOI: migrateGame(parsed.TTOI),
+          TKM: migrateGame(parsed.TKM),
           shared: {
             diceRoll: parsed.shared?.diceRoll || parsed.TDOA?.diceRoll || 1
           }

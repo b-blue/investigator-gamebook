@@ -1,4 +1,4 @@
-export type GameType = 'TDOA' | 'TTOI';
+export type GameType = 'TDOA' | 'TTOI' | 'TKM';
 
 export interface Attributes {
   willpower: number;
@@ -25,7 +25,7 @@ export interface Ability {
 
 export interface Secret {
   name: string;
-  campaign: 'TDOA' | 'TTOI';
+  campaign: 'TDOA' | 'TTOI' | 'TKM';
 }
 
 export interface Character {
@@ -67,5 +67,6 @@ export interface SharedState {
 export interface AppState {
   TDOA: GameState;
   TTOI: GameState;
+  TKM: GameState;
   shared: SharedState;
 }
