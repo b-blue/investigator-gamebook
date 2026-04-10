@@ -17,17 +17,17 @@
   {
     "isEquipped": false,
     "name": "Mailbag",
-    "description": "Whenever you gain an item, if you do not already gain a resource, gain 1 resource."
+    "description": "Whenever you gain an item, if you do not already gain a Resource, gain 1 Resource."
   },
   {
     "isEquipped": false,
     "name": "Obscure Tome",
-    "description": "You begin the adventure with 2 clues."
+    "description": "You begin the adventure with 2 Clues."
   },
   {
     "isEquipped": false,
     "name": ".45 Automatic",
-    "description": "Start with 6 ammo. When a test allows you to spend a resource to add to your combat, you may spend 1 ammo instead."
+    "description": "Start with 6 ammo. When a test allows you to spend a Resource to add to your Combat, you may spend 1 ammo instead."
   },
   {
     "isEquipped": false,

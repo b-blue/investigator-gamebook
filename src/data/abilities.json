@@ -7,87 +7,87 @@
   {
     "isWeakness": true,
     "name": "Dark Memories",
-    "description": "Each time you spend a clue, roll a dice. On a roll of a 1, Agnes loses -1 sanity."
+    "description": "Each time you spend a Clue, roll a dice. On a roll of a 1, Agnes loses -1 Sanity."
   },
   {
     "isWeakness": false,
     "name": "Boxer",
-    "description": "If you roll a 6 while using your combat, add +1 to your total score (If you are rolling more than one dice, add +1 for each 6 you roll)."
+    "description": "If you roll a 6 while using your Combat, add +1 to your total score (If you are rolling more than one dice, add +1 for each 6 you roll)."
   },
   {
     "isWeakness": true,
     "name": "Hunted by the Mob",
-    "description": "Each time you gain a resource, roll a die. If the score is below your current number of resources, do not gain a resource."
+    "description": "Each time you gain a Resource, roll a die. If the score is below your current number of Resources, do not gain a Resource."
   },
   {
     "isWeakness": false,
     "name": "Reporter",
-    "description": "If you roll a 6 while using your intellect, gain +1 clue."
+    "description": "If you roll a 6 while using your Intellect, gain +1 Clue."
   },
   {
     "isWeakness": true,
     "name": "Rex's Curse",
-    "description": "If you roll a double when using your intellect or willpower, treat the score on each die as a 1."
+    "description": "If you roll a double when using your Intellect or Willpower, treat the score on each die as a 1."
   },
   {
     "isWeakness": false,
     "name": "Nor Gloom of Night",
-    "description": "When you roll less than the required score in any test using your willpower, choose to gain 1 resource, 1 health, or 1 sanity. You may not increase your health or sanity above their starting level using this ability."
+    "description": "When you roll less than the required score in any test using your Willpower, choose to gain 1 Resource, 1 Health, or 1 Sanity. You may not increase your Health or Sanity above their starting level using this ability."
   },
   {
     "isWeakness": true,
     "name": "Called by the Mists",
-    "description": "Whenever you lose sanity, roll one die (If you are in Kingsport, roll two dice and pick the highest). If the score is higher than your current sanity, lose 1 resource."
+    "description": "Whenever you lose Sanity, roll one die (If you are in Kingsport, roll two dice and pick the highest). If the score is higher than your current Sanity, lose 1 Resource."
   },
   {
     "isWeakness": false,
     "name": "Scholar",
-    "description": "Whenever you spend a clue or resource as part of a test, if the test is successful, gain 1 clue or resource (your choice)."
+    "description": "Whenever you spend a Clue or Resource as part of a test, if the test is successful, gain 1 Clue or Resource (your choice)."
   },
   {
     "isWeakness": true,
     "name": "Whispers of the Deep",
-    "description": "Whenver you lose sanity, also lose 1 resource or 1 clue (your choice)."
+    "description": "Whenver you lose Sanity, also lose 1 Resource or 1 Clue (your choice)."
   },
   {
     "isWeakness": false,
     "name": "Ex-Con",
-    "description": "You may spend 1 resource to attempt any failed test again. Repeat the test using the same number of dice you used the first time, and counting any other modifiers the same. You can only repeat each failed test once."
+    "description": "You may spend 1 Resource to attempt any failed test again. Repeat the test using the same number of dice you used the first time, and counting any other modifiers the same. You can only repeat each failed test once."
   },
   {
     "isWeakness": true,
     "name": "Hospital Debts",
-    "description": "When you spend a resource, lose one additional resource (if you have one)."
+    "description": "When you spend a Resource, lose one additional Resource (if you have one)."
   },
   {
     "isWeakness": false,
     "name": "Drifter",
-    "description": "Whenever you spend a resource as part of a test, if the test is successful, gain 1 resource."
+    "description": "Whenever you spend a Resource as part of a test, if the test is successful, gain 1 Resource."
   },
   {
     "isWeakness": true,
     "name": "Siren's Call",
-    "description": "Each time you gain doom, spend a resource. Otherwise, gain 1 additional doom."
+    "description": "Each time you gain Doom, spend a Resource. Otherwise, gain 1 additional Doom."
   },
   {
     "isWeakness": false,
     "name": "Blessed, Cursed",
-    "description": "For willpower tests, you may roll 2 dice instead of 1, and select the die of your choosing. However, if the dice roll results in a double, you automatically fail and gain 1 doom."
+    "description": "For Willpower tests, you may roll 2 dice instead of 1, and select the die of your choosing. However, if the dice roll results in a double, you automatically fail and gain 1 Doom."
   },
   {
     "isWeakness": true,
     "name": "Weeping Yurei",
-    "description": "When you fail a willpower test, roll a die and add your combat. If the total sum is equal to or greater than the current doom, lose 1 health."
+    "description": "When you fail a Willpower test, roll a die and add your Combat. If the total sum is equal to or greater than the current Doom, lose 1 Health."
   },
   {
     "isWeakness": false,
     "name": "Determined",
-    "description": "When using combat, if you win a round, add an additional +1 combat to the next round."
+    "description": "When using Combat, if you win a round, add an additional +1 Combat to the next round."
   },
   {
     "isWeakness": true,
     "name": "I'll Do It Myself",
-    "description": "Each time you lose sanity or health, roll a die. If the score is below your current sanity or health (as appropriate), gain +1 doom. If you lose sanity and health at the same time, choose one to apply the effect (your choice)."
+    "description": "Each time you lose Sanity or Health, roll a die. If the score is below your current Sanity or Health (as appropriate), gain +1 Doom. If you lose Sanity and Health at the same time, choose one to apply the effect (your choice)."
   },
   {
     "isWeakness": false,
