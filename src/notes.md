@@ -1,57 +1,16 @@
 # Notes
 
-Add the following abilities to abilities.json, if they are not already in the list (there should be no repeated entries): 
-Sailor
-Tough 
-Survivor
-Mystic
-Academic
-Arcane Studies
-Guardian
-Fighter
-Secret Rites
-Studious
-Police
-Quick-Witted
-Ancient Languages
-Climber
+When a run is finished, a modal should appear indicating which secrets will be added to the persistent list of all secrets, along with a proportion of how many secrets have been found so far, relaying information to the effect of the below:  
+- You found 3 secrets this run
+- You have found 25/50 secrets for The Tides of Innsmouth
 
-Add the following weaknesses to abilities.json, if they are not already in the list (there should be no repeated entries):
-Tainted Lineage
-Cursed
-Haunted
-Criminal
-Troubled Dreams
-Watched
-Fear of Heights
-Claustrophobia
+When the Finish Run button is confirmed, the application should check the game state to determine if the conditions were met during the current run to satisfy the following "Super Secrets"
 
+TDOA
 
-Add the following items to items.json, if they are not already in the list (there should be no repeated entries):
-Cudgel
-Rope
-Brass Telescope
-Sea Gold
-Carved Idol
-Crowbar
-Whiskey
-Greenstone Statue
-Map of the Tunnels
-Harpoon
-Octopus Crown
-Screwdriver
-Wooden Mallet
-Treasure Hunter's Chart
-Dr Addison's Diary
-Innsmouth Tribune
-Book of Tide Times
-Logbook
-Oil Lantern
-Ship's Compass
-Flick Knife
-Hammer
-Spade
-Moonshine
-Umbrella
-Lantern
-Flashlight
+TTOI
+
+Hero
+- Finish with a combined Combat + Intellect + Willpower score of 15 or higher
+A Close Shave
+- Finish with 3 or more stars and 

@@ -66,7 +66,7 @@
   },
   {
     "isWeakness": true,
-    "name": "Sirens' Call",
+    "name": "Siren's Call",
     "description": "Each time you gain doom, spend a resource. Otherwise, gain 1 additional doom."
   },
   {
@@ -168,8 +168,7 @@
     "isWeakness": true,
     "name": "Paranoid",
     "description": ""
-  }
-,
+  },
   {
     "isWeakness": false,
     "name": "Sailor",
@@ -224,6 +223,75 @@
     "isWeakness": true,
     "name": "Fear of Heights",
     "description": ""
+  },
+  {
+    "isWeakness": false,
+    "name": "Clairvoyant",
+    "description": "For intellect tests, you may roll 2 dice instead of 1 and select the die of your choosing."
+  },
+  {
+    "isWeakness": false,
+    "name": "Improvisation",
+    "description": "Once per adventure, you may increase a skill of your choice by +1, but you must also decrease a skill by -1. You may use this ability more than once per adventure, but after the first time you must spend +1 resource for each additional use."
+  },
+  {
+    "isWeakness": false,
+    "name": "Poet",
+    "description": "Whenever you spend a clue as part of a test, if the test is successful, gain 1 clue."
+  },
+  {
+    "isWeakness": false,
+    "name": "Seeker",
+    "description": ""
+  },
+  {
+    "isWeakness": false,
+    "name": "Legal Knowledge",
+    "description": ""
+  },
+  {
+    "isWeakness": false,
+    "name": "Resolved",
+    "description": ""
+  },
+  {
+    "isWeakness": false,
+    "name": "Rogue",
+    "description": ""
+  },
+  {
+    "isWeakness": false,
+    "name": "Civic",
+    "description": ""
+  },
+  {
+    "isWeakness": true,
+    "name": "Crisis of Identity",
+    "description": "Each time you spend a resource, roll 1 die. If you roll a 1, lose 1 sanity."
+  },
+  {
+    "isWeakness": true,
+    "name": "Dark Future",
+    "description": "If you roll a double during a test, gain +1 doom and the test is automatically unsuccessful."
+  },
+  {
+    "isWeakness": true,
+    "name": "Dreams of the Flood",
+    "description": "Each time you gain a clue, roll 1 die. If the number is lower than your current number of clues, do not take a clue."
+  },
+  {
+    "isWeakness": true,
+    "name": "Paranoia",
+    "description": ""
+  },
+  {
+    "isWeakness": true,
+    "name": "Arachnophobia",
+    "description": ""
+  },
+  {
+    "isWeakness": true,
+    "name": "Cautious",
+    "description": ""
   }
 ]
-

@@ -26,7 +26,6 @@
       "Heirloom of Hyperborea"
     ]
   },
-
   {
     "name": "Rex Murphy",
     "description": "The Reporter",
@@ -52,7 +51,6 @@
       "Reporter's Notebook"
     ]
   },
-
   {
     "name": "Nathaniel Cho",
     "description": "The Boxer",
@@ -80,7 +78,6 @@
       "Hidden Weapon"
     ]
   },
-
   {
     "name": "Stella Clark",
     "description": "The Letter Carrier",
@@ -108,7 +105,6 @@
       "Mailbag"
     ]
   },
-
   {
     "name": "Amanda Sharpe",
     "description": "The Student",
@@ -130,14 +126,12 @@
     ],
     "weaknesses": [
       "Whispers of the Deep",
-      "Troubled",
-      "Dreams"
+      "Troubled Dreams"
     ],
     "items": [
       "Obscure Tome"
     ]
   },
-
   {
     "name": "Skids O'Toole",
     "description": "The Ex-Con",
@@ -162,8 +156,7 @@
     "items": [
       ".45 Automatic"
     ]
-  }
-,
+  },
   {
     "name": "Silas Marsh",
     "description": "The Sailor",
@@ -191,7 +184,6 @@
       "Sailor's Net"
     ]
   },
-
   {
     "name": "Kohaku Narukami",
     "description": "The Folklorist",
@@ -220,7 +212,6 @@
       "The Book of Living Myths"
     ]
   },
-
   {
     "name": "Marion Tavares",
     "description": "The Trawler",
@@ -242,10 +233,93 @@
     ],
     "weaknesses": [
       "I'll Do It Myself",
-      "Criminal"
+      "Paranoid",
+      "Troubled Dreams"
     ],
     "items": [
       "Strong Rope"
+    ]
+  },
+  {
+    "name": "Jacqueline Fine",
+    "description": "The Psychic",
+    "attributes": {
+      "willpower": 5,
+      "intellect": 3,
+      "combat": 2,
+      "health": 6,
+      "sanity": 9,
+      "resources": 1,
+      "clues": 1,
+      "doom": 0
+    },
+    "abilities": [
+      "Clairvoyant",
+      "Mystic",
+      "Agile"
+    ],
+    "weaknesses": [
+      "Dark Future",
+      "Troubled Dreams",
+      "Paranoia"
+    ],
+    "items": [
+      "Dream Journal"
+    ]
+  },
+  {
+    "name": "Lucius Galloway",
+    "description": "The Dreamer",
+    "attributes": {
+      "willpower": 2,
+      "intellect": 4,
+      "combat": 1,
+      "health": 8,
+      "sanity": 6,
+      "resources": 0,
+      "clues": 0,
+      "doom": 0
+    },
+    "abilities": [
+      "Poet",
+      "Seeker",
+      "Academic",
+      "Ancient Languages"
+    ],
+    "weaknesses": [
+      "Dreams of the Flood",
+      "Troubled Dreams"
+    ],
+    "items": [
+      "Book of Verse"
+    ]
+  },
+  {
+    "name": "Lola Hayes",
+    "description": "The Actress",
+    "attributes": {
+      "willpower": 3,
+      "intellect": 3,
+      "combat": 3,
+      "health": 6,
+      "sanity": 6,
+      "resources": 0,
+      "clues": 0,
+      "doom": 0
+    },
+    "abilities": [
+      "Improvisation",
+      "Guardian",
+      "Quick-Witted"
+    ],
+    "weaknesses": [
+      "Crisis of Identity",
+      "Haunted",
+      "Cursed",
+      "Cautious"
+    ],
+    "items": [
+      "Calling Card"
     ]
   }
 ]

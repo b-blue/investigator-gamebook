@@ -2,17 +2,17 @@
   {
     "isEquipped": false,
     "name": "Heirloom of Hyperborea",
-    "description": "If you succeed in a test using your WILLPOWER, gain +1 RESOURCE."
+    "description": "If you succeed in a test using your Willpower, gain +1 Resource."
   },
   {
     "isEquipped": false,
     "name": "Hidden Weapon",
-    "description": "Once per adventure you may add +3 to your COMBAT."
+    "description": "Once per adventure you may add +3 to your Combat."
   },
   {
     "isEquipped": false,
     "name": "Reporter's Notebook",
-    "description": "You begin the game with +1 CLUE."
+    "description": "You begin the game with +1 Clue."
   },
   {
     "isEquipped": false,
@@ -36,7 +36,7 @@
   },
   {
     "isEquipped": false,
-    "name": "Dr. Blaine's Notebook",
+    "name": "Dr Blaine's Notebook",
     "description": ""
   },
   {
@@ -81,7 +81,7 @@
   },
   {
     "isEquipped": false,
-    "name": "Cultists Robes",
+    "name": "Cultist Robes",
     "description": ""
   },
   {
@@ -106,7 +106,7 @@
   },
   {
     "isEquipped": false,
-    "name": "Detective Hardin's Card",
+    "name": "Detective Harden's Card",
     "description": ""
   },
   {
@@ -148,9 +148,7 @@
     "isEquipped": false,
     "name": "Flick Knife",
     "description": ""
-  }
-
-,
+  },
   {
     "isEquipped": false,
     "name": "Cudgel",
@@ -270,6 +268,155 @@
     "isEquipped": false,
     "name": "Flashlight",
     "description": ""
+  },
+  {
+    "isEquipped": false,
+    "name": "Pencil",
+    "description": ""
+  },
+  {
+    "isEquipped": false,
+    "name": "Six-Sided Dice",
+    "description": ""
+  },
+  {
+    "isEquipped": false,
+    "name": "Battered Hip Flask",
+    "description": ""
+  },
+  {
+    "isEquipped": false,
+    "name": "Book of Matches",
+    "description": ""
+  },
+  {
+    "isEquipped": false,
+    "name": "Brass Key",
+    "description": ""
+  },
+  {
+    "isEquipped": false,
+    "name": "Dirty Shoes",
+    "description": ""
+  },
+  {
+    "isEquipped": false,
+    "name": "Dreamer's Diary",
+    "description": ""
+  },
+  {
+    "isEquipped": false,
+    "name": "Empty Glass Jar",
+    "description": ""
+  },
+  {
+    "isEquipped": false,
+    "name": "Forgotten Cults of Hyperborea",
+    "description": ""
+  },
+  {
+    "isEquipped": false,
+    "name": "Fossil Fang",
+    "description": ""
+  },
+  {
+    "isEquipped": false,
+    "name": "Full Specimen Jar",
+    "description": ""
+  },
+  {
+    "isEquipped": false,
+    "name": "Grotesque Idol",
+    "description": ""
+  },
+  {
+    "isEquipped": false,
+    "name": "Leather Bookmark",
+    "description": ""
+  },
+  {
+    "isEquipped": false,
+    "name": "Letter Opener",
+    "description": ""
+  },
+  {
+    "isEquipped": false,
+    "name": "List of Names",
+    "description": ""
+  },
+  {
+    "isEquipped": false,
+    "name": "Olde Kingsport and Its Curiosities",
+    "description": ""
+  },
+  {
+    "isEquipped": false,
+    "name": "Pince-Nez Glasses",
+    "description": ""
+  },
+  {
+    "isEquipped": false,
+    "name": "Pottery Shard",
+    "description": ""
+  },
+  {
+    "isEquipped": false,
+    "name": "Satchel",
+    "description": ""
+  },
+  {
+    "isEquipped": false,
+    "name": "Shirt Button",
+    "description": ""
+  },
+  {
+    "isEquipped": false,
+    "name": "Silver Hip Flask",
+    "description": ""
+  },
+  {
+    "isEquipped": false,
+    "name": "Syringe of Morphine",
+    "description": ""
+  },
+  {
+    "isEquipped": false,
+    "name": "The Somnambulist's Path",
+    "description": ""
+  },
+  {
+    "isEquipped": false,
+    "name": "Torn Sleeve",
+    "description": ""
+  },
+  {
+    "isEquipped": false,
+    "name": "Sailor's Net",
+    "description": "Once per adventure, while using your Combat, you may immediately cancel the first dice roll and roll the dice again."
+  },
+  {
+    "isEquipped": false,
+    "name": "The Book of Living Myths",
+    "description": "Once per adventure, you may substitute your Intellect for your Combat in any given fight."
+  },
+  {
+    "isEquipped": false,
+    "name": "Strong Rope",
+    "description": "Once per adventure, you may add +3 to your Willpower."
+  },
+  {
+    "isEquipped": false,
+    "name": "Dream Journal",
+    "description": "You begin each adventure with +1 Clue and +1 Resource."
+  },
+  {
+    "isEquipped": false,
+    "name": "Book of Verse",
+    "description": "You may spend Resources as if they were Clues when using your Intellect."
+  },
+  {
+    "isEquipped": false,
+    "name": "Calling Card",
+    "description": "Once per adventure, choose to gain an Ability mentioned in the entry of your choosing, if you do not already have it. You may keep this Ability for the remainder of your adventure."
   }
 ]
-
