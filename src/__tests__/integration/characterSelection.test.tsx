@@ -110,11 +110,12 @@ describe('Character Selection Flow - Integration Test', () => {
     // Should see confirmation modal
     await waitFor(() => {
       expect(screen.getByText(/Switch Character/i)).toBeInTheDocument();
-      expect(screen.getByText(/start over with Agnes Baker/i)).toBeInTheDocument();
+      expect(screen.getByText(/Switching to/i)).toBeInTheDocument();
+      expect(screen.getByText(/Agnes Baker/i)).toBeInTheDocument();
     });
 
     // Confirm the switch
-    const confirmButton = screen.getByText(/Start Over/i);
+    const confirmButton = screen.getByText(/^Confirm$/i);
     await user.click(confirmButton);
 
     // Character should be switched
@@ -195,7 +196,7 @@ describe('Character Selection Flow - Integration Test', () => {
     });
 
     // Choose "Load" to preserve progress
-    const loadButton = screen.getByText(/Load/i);
+    const loadButton = screen.getByText(/Load Saved/i);
     await user.click(loadButton);
 
     // Character should be switched
@@ -215,11 +216,27 @@ describe('Character Selection Flow - Integration Test', () => {
   it('should restart character with defaults when choosing restart', async () => {
     const user = userEvent.setup();
     
-    // Pre-populate with Agnes previously played with modified stats
+    // Pre-populate with Rex Murphy selected, and Agnes previously played with modified stats
     const initialState = {
       TDOA: {
-        currentCharacterName: '',
+        currentCharacterName: 'Rex Murphy',
         characters: {
+          'Rex Murphy': {
+            attributes: {
+              willpower: 3,
+              intellect: 4,
+              combat: 2,
+              health: 6,
+              sanity: 9,
+              resources: 0,
+              clues: 1,
+              doom: 0
+            },
+            abilities: ['Reporter', 'Seeker'],
+            weaknesses: ["Rex's Curse", 'Cursed'],
+            items: ["Reporter's Notebook"],
+            secrets: []
+          },
           'Agnes Baker': {
             attributes: {
               willpower: 3, // Modified
@@ -249,8 +266,8 @@ describe('Character Selection Flow - Integration Test', () => {
 
     render(<App />);
 
-    // Select Agnes Baker
-    const placeholder = screen.getByPlaceholderText('Select Character');
+    // Select Agnes Baker from Rex Murphy
+    const placeholder = screen.getByPlaceholderText(/Rex Murphy/);
     await user.click(placeholder);
 
     const agnesOption = await screen.findByText(/Agnes Baker.*The Waitress/);
@@ -262,7 +279,7 @@ describe('Character Selection Flow - Integration Test', () => {
     });
 
     // Choose "Restart" to reset to defaults
-    const restartButton = screen.getByText(/Restart/i);
+    const restartButton = screen.getByText(/Restart Fresh/i);
     await user.click(restartButton);
 
     // Character should be restarted with defaults

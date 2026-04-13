@@ -84,12 +84,15 @@ describe('Finish Run Workflow - Integration Test', () => {
       expect(screen.getByText(/Rex Murphy/)).toBeInTheDocument();
     });
 
-    // Select 3 stars
-    const threeStarButton = screen.getByRole('button', { name: '3' });
+    // Select 3 stars - use getAllByRole and filter by className
+    const starButtons = screen.getAllByRole('button', { name: '3' });
+    const threeStarButton = starButtons.find(btn => btn.className.includes('star-btn'));
+    if (!threeStarButton) throw new Error('Star button not found');
     await user.click(threeStarButton);
 
     // Confirm finish run
-    const confirmButton = screen.getByRole('button', { name: /Finish Run/i });
+    const confirmButtons = screen.getAllByRole('button', { name: /Finish Run/i });
+    const confirmButton = confirmButtons.find(btn => btn.className.includes('modal-btn'))!;
     await user.click(confirmButton);
 
     // Run history modal should appear
@@ -172,14 +175,17 @@ describe('Finish Run Workflow - Integration Test', () => {
 
     // Select 0 stars (failed run)
     await waitFor(() => {
-      const zeroStarButton = screen.getByRole('button', { name: '0' });
-      expect(zeroStarButton).toBeInTheDocument();
+      const zeroStarButtons = screen.getAllByRole('button', { name: '0' });
+      expect(zeroStarButtons.length).toBeGreaterThan(0);
     });
-    const zeroStarButton = screen.getByRole('button', { name: '0' });
+    const zeroStarButtons = screen.getAllByRole('button', { name: '0' });
+    const zeroStarButton = zeroStarButtons.find(btn => btn.className.includes('star-btn'));
+    if (!zeroStarButton) throw new Error('Star button not found');
     await user.click(zeroStarButton);
 
     // Confirm
-    const confirmButton = screen.getByRole('button', { name: /Finish Run/i });
+    const confirmButtons = screen.getAllByRole('button', { name: /Finish Run/i });
+    const confirmButton = confirmButtons.find(btn => btn.className.includes('modal-btn'))!;
     await user.click(confirmButton);
 
     // Wait for modal
@@ -237,14 +243,17 @@ describe('Finish Run Workflow - Integration Test', () => {
 
     // Select 1 star
     await waitFor(() => {
-      const oneStarButton = screen.getByRole('button', { name: '1' });
-      expect(oneStarButton).toBeInTheDocument();
+      const oneStarButtons = screen.getAllByRole('button', { name: '1' });
+      expect(oneStarButtons.length).toBeGreaterThan(0);
     });
-    const oneStarButton = screen.getByRole('button', { name: '1' });
+    const oneStarButtons = screen.getAllByRole('button', { name: '1' });
+    const oneStarButton = oneStarButtons.find(btn => btn.className.includes('star-btn'));
+    if (!oneStarButton) throw new Error('Star button not found');
     await user.click(oneStarButton);
 
     // Confirm
-    const confirmButton = screen.getByRole('button', { name: /Finish Run/i });
+    const confirmButtons = screen.getAllByRole('button', { name: /Finish Run/i });
+    const confirmButton = confirmButtons.find(btn => btn.className.includes('modal-btn'))!;
     await user.click(confirmButton);
 
     // Wait for run history
@@ -372,14 +381,17 @@ describe('Finish Run Workflow - Integration Test', () => {
 
     // Select 4 stars
     await waitFor(() => {
-      const fourStarButton = screen.getByRole('button', { name: '4' });
-      expect(fourStarButton).toBeInTheDocument();
+      const fourStarButtons = screen.getAllByRole('button', { name: '4' });
+      expect(fourStarButtons.length).toBeGreaterThan(0);
     });
-    const fourStarButton = screen.getByRole('button', { name: '4' });
+    const fourStarButtons = screen.getAllByRole('button', { name: '4' });
+    const fourStarButton = fourStarButtons.find(btn => btn.className.includes('star-btn'));
+    if (!fourStarButton) throw new Error('Star button not found');
     await user.click(fourStarButton);
 
     // Confirm
-    const confirmButton = screen.getByRole('button', { name: /Finish Run/i });
+    const confirmButtons = screen.getAllByRole('button', { name: /Finish Run/i });
+    const confirmButton = confirmButtons.find(btn => btn.className.includes('modal-btn'))!;
     await user.click(confirmButton);
 
     // Wait for run history
@@ -464,14 +476,17 @@ describe('Finish Run Workflow - Integration Test', () => {
     await user.click(finishButton);
 
     await waitFor(() => {
-      const confirmButton = screen.getByRole('button', { name: /Finish Run/i });
-      expect(confirmButton).toBeInTheDocument();
+      const confirmButtons = screen.getAllByRole('button', { name: /Finish Run/i });
+      expect(confirmButtons.length).toBeGreaterThan(0);
     });
     
-    const twoStarButton = screen.getByRole('button', { name: '2' });
+    const twoStarButtons = screen.getAllByRole('button', { name: '2' });
+    const twoStarButton = twoStarButtons.find(btn => btn.className.includes('star-btn'));
+    if (!twoStarButton) throw new Error('Star button not found');
     await user.click(twoStarButton);
     
-    const confirmButton = screen.getByRole('button', { name: /Finish Run/i });
+    const confirmButtons = screen.getAllByRole('button', { name: /Finish Run/i });
+    const confirmButton = confirmButtons.find(btn => btn.className.includes('modal-btn'))!;
     await user.click(confirmButton);
 
     // Wait for run history modal
